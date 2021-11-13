@@ -1,0 +1,72 @@
+hint: find PROGRESS NOW words to get immediately into current progress.
+
+We are going to create shopping web application (simple) based on PHP Object Oriented Programming.
+Object Oriented Programming should not change the index.php
+Everything need to be displayed by the main page (index.php) will be imported from support php file. In order to make up its functionality, This style of programming only change the support file.
+App Description:
+The app has Product.php, Cart.php, and CartItem.php. 
+So on the index.php, we have several button lead for its respective features. There are:
+1. Product	>> Handle the product listing and its quantity on stock. Add and Remove the product based on stock		>> This is actually for shop officer (maybe we can add password for this later)
+2. Cart		>> Handle Cart for the customer to store item for purchase.
+
+**** Cart features:
+on Cart Object:
+1. Add item
+There is only one method to add item into cart. It is from Cart object. 
+cart->addItem($productname, quantity)
+cart->addItem($product2, quantity)
+do this by selecting product from display list (checklist) then ask for quantity using input number.
+LATER, Add item maybe including search function to make ease the finding. Do search and display possible product, of course with its checklist box and quantity. Also revert button to return into initial product list display.
+
+2. Remove item
+Remove the specified item(s) from cart. If the quantity goes zero, remove the product from the cart list.
+the method to remove the item is by calling Cart object function, passing product name and the quantity to remove.
+Later on GUI app, We accomplish this by selecting product from display list (checklist), then give number input to define quantity to remove. Next to the quantity to remove, there is [ALL] button to allow user remove all of the selected product >> set the number input automatically to max quantity found.
+
+<<<<FROM ADD_ITEM AND REMOVE_ITEM ABOVE, WE CAN CONCLUDE THAT THE PROCESS HAPPENS SIMULTANEOUSLY, WE SEND TO CART TABLE IN DATABASE ON ONE GO (One connection accomplish multiple creating new entry). >>>>
+
+3. Display item
+Check the carried item(s) inside the cart. It always do display for the beginning of Cart Menu.
+4. Remove All
+Clear everything on Cart.
+5. Get total Quantity
+Total Qtt is displayed on the top corner left of Cart page, automatically change with user changing value on the page. (maybe it will use javascript things, IDK).
+6. Get total sum
+Total sum is displayed on the top corner right of Cart page, automatically change with user changing value on the page. (maybe it will use javascript things, IDK).
+
+<<<<Both of get total quantity and total sum is displayed before purchasing. So it is shown after user clicking [BUY] button.>>>>
+
+7. Buy
+The purchasing lead to downloading file action (pdf) which shows the list, total qtt, and total sum of items. pdf download is confirmed by clicking [CONFIRM PURCHASE] button.
+
+8. And back to Cart Main Menu.
+9. Toogle Cart
+Toogle cart allows the user to move from one cart into another. It is done by clicking a simple arrow button at top left and top right of the current Cart page. If there is none, it doesn't show. If it is the last cart, the right arrow doesn't show. If this is the first cart, the left arrow doesnot show up.
+
+on Cart Main Menu:
+1. Creating Cart
+Make Cart Object by a simple button, then it asks for the cart name using pop up >> submit. The submit actually do create new Cart object, then create new table inside predefined database. The table name is regexed (if it contain space ) to change space into underscore. Do this on everytime communicating with database.
+2. Displaying available cart
+No Cart Exist shown if no Cart object is created before. This display a button to access Cart page based on cart table name.
+3. Destroy Cart
+4. Destroy all Cart
+5. Back to main page
+
+<<<<Current Cart page displaying the Name of current cart, And it's index number. Index number is resetted when the cart destroyed.>>>>
+
+**** Product features:
+1. Add product + quantity for stock + pricing
+2. Remove product
+
+
+<<<< All is done manually by the administrator officer. >>>>
+
+
+
+
+
+
+
+PROGRESS:
+1. First make only the php version
+2. Make the GUI to trigger the actions
