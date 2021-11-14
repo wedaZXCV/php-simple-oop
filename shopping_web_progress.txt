@@ -68,5 +68,17 @@ No Cart Exist shown if no Cart object is created before. This display a button t
 
 
 PROGRESS:
-1. First make only the php version
-2. Make the GUI to trigger the actions
+PROGRESS NOW
+creating the product features.
+>>> currently on completing productPage.inc.php
+
+
+
+
+
+Note:
+everything on the each of considered main.php is always only consisting of Object method calling. Do not create any HTML code on the main.php (of every of its part).
+
+
+
+
