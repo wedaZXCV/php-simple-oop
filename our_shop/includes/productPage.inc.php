@@ -14,35 +14,74 @@ class ProductPage{
 
   // The initiator code for displaying 
   public function initialLoad(){
-    //check if db exists. Create new db if not exists yet.
-    $conn = $this->connectDataBase();
-    //if $conn error meaning db not exists, create new one
-    if($conn === error){
-      $this->createDataBase();
-      // do we need to do connect again here?
-    }
+    $conn = $this->connectDataBase($withdb = FALSE);
+    $this->checkDBandTable();
+    
     $this->displayUI($conn);
     $this->closeDataBase($conn);
   }
-
+  // the HTML routines comes into main php of product page(product.php)
+  // So now here, the <div> parts only
   private function displayUI(){
+    //HTML codes before list table
+    echo "
+    
+    
+    ";
+    //HTML codes to call entries from mySQL
     $this->displayListProduct($conn);
+    //HTML codes after list table
+    echo "
+    
+    
+    ";
   }
 
-  private function connectDataBase(){
-
+  private function connectDataBase($withdb = TRUE){
+    if($withdb == TRUE){
+      $conn = new mysqli($this->dbhost, $this->dbuser, $this->dbpass, $this->db);
+    } else{
+      $conn = new mysqli($this->dbhost, $this->dbuser, $this->dbpass);
+    }
+    return $conn;
   }
 
-  private function closeDataBase(){
-
+  private function closeDataBase($conn){
+    $conn -> close();
   }
 
-  private function createDataBase(){
-
+  private function checkDBandTable(){
+    //check if db exists. Create new db if not exists yet.
+    $result = $conn->query("USE ".$this->db);
+    if(!$result){
+      if($conn->errno === 1049){
+        $conn->query("CREATE DATABASE ".$this->db);
+        $conn->query("USE ".$this->db);
+      }
+    }
+    //check if table exists. Create new table if not exists yet.
+    $result = $conn->query("SELECT * FROM products");
+    if(!$result){
+      //create table
+      $conn->query("CREATE TABLE products(id INT(255) UNSIGNED, name VARCHAR(50), price DECIMAL(10,2), qtt INT(255));");
+      $result = $conn->query("SELECT * FROM products");
+    }
   }
 
   private function displayListProduct($conn){
-
+    $result = $conn->query("SELECT * FROM products");
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        echo "
+        <tr>
+          <td>".$row["id"]."</td>
+          <td>".$row["name"]."</td>
+          <td>".$row["price"]."</td>
+          <td>".$row["qtt"]."</td>
+        </tr>
+        ";
+      }
+    }
   }
 
   /**

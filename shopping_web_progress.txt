@@ -68,11 +68,19 @@ No Cart Exist shown if no Cart object is created before. This display a button t
 
 
 PROGRESS:
-PROGRESS NOW
 creating the product features.
 >>> currently on completing productPage.inc.php
 
+the product table should consist of these following entries:
+1.	productID	>>> id
+2.	productName	>>> name
+3.	price		>>> price
+4.	Quantity	>>> qtt
 
+>>> auto create data base and table is success!!
+
+PROGRESS NOW
+now working with displayUI of product page.
 
 
 
