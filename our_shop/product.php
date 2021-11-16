@@ -15,7 +15,7 @@
   $prdPage = new ProductPage($dbhost, $dbuser, $dbpass, $db);
   $prdPage->initialLoad();
 
-  // 2. Add product features
+  // 2. Add product features >>> directly traverse into newProduct.php
 
   // 3. Remove product features
 

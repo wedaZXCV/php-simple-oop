@@ -16,7 +16,7 @@ class Product{
   }
 
   public function addNewProduct(){
-
+    
   }
 
   public function increaseQtty(){
