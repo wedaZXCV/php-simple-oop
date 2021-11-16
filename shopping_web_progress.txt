@@ -79,11 +79,17 @@ the product table should consist of these following entries:
 
 >>> auto create data base and table is success!!
 
+
+now working with displayUI of product page (productPage.inc.php)
+the displayUI comes with add entries which will link the user from product.php to newProduct.php.
+* product.php harness productPage.inc.php	>> the basic is done
+* newProduct.php harness product.inc.php	>> the basic is done
+
 PROGRESS NOW
-now working with displayUI of product page.
+product.inc.php add new product to database.
 
 
-
+require class from product.inc.php
 Note:
 everything on the each of considered main.php is always only consisting of Object method calling. Do not create any HTML code on the main.php (of every of its part).
 

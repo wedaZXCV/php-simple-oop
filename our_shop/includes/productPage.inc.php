@@ -12,28 +12,127 @@ class ProductPage{
     $this->db = $db;
   }
 
-  // The initiator code for displaying 
+  // The initiator code for displaying on main Product Page
   public function initialLoad(){
     $conn = $this->connectDataBase($withdb = FALSE);
-    $this->checkDBandTable();
+    $this->checkDBandTable($conn);
     
     $this->displayUI($conn);
     $this->closeDataBase($conn);
   }
+  // The initiator code for displaying on Add New Product Page
+  public function loadAddNewPrdPage(){
+    $conn = $this->connectDataBase();
+    $this->displayAddNewPrd($conn);
+    $this->closeDataBase($conn);
+  }
+
   // the HTML routines comes into main php of product page(product.php)
   // So now here, the <div> parts only
-  private function displayUI(){
+  // the displayUI bellow is for main Product Page
+  private function displayUI($conn){
     //HTML codes before list table
     echo "
-    
-    
+    <div class=\"header\">
+      CHAOS MART
+    </div>
+    <div class=\"title\">
+      <h1>PRODUCT LIST</h1>
+    </div>
+    <div class=\"subtitle\">
+      <h3>Product list consist of various item that are being sold and available for customers.
+        The available quantity and the pricing of each item is well informed through the list.
+        You as the administrator should be able to keep on track with the update of stock condition.
+        You can add new product or remove the existing product on the list.
+        Use the bellow checkbox to choose every item to be cleared, or hover mouse over an item to change its
+        quantity and/or price. Delete individual item one by one is also available.
+      </h3>
+    </div>
+    <div class=\"item-table-container\">
+      <table class=\"item-table\">
+        <tr>
+          <th>Id</th>
+          <th>Name of product</th>
+          <th>Price</th>
+          <th>Quantity in stock</th>
+        </tr>
+    ";
+    //HTML codes to add new entries to mySQL
+    echo "
+    <form class=\"product-main-page-btn\" action=\"newProduct.php\" method=\"POST\">
+      <button type=\"submit\" class=\"buttons\">ADD NEW PRODUCT</button>
+    </form>
     ";
     //HTML codes to call entries from mySQL
-    $this->displayListProduct($conn);
+    $result = $conn->query("SELECT * FROM products");
+    if ($result->num_rows > 0){
+      while($row = $result->fetch_assoc()) {
+        $this->displayListProduct($conn);
+      }
+    }
     //HTML codes after list table
     echo "
-    
-    
+    </table>
+    </div>
+    <div class=\"footer\">
+      copyright &copy 2021, allright reserved.
+    </div>
+    ";
+  }
+
+  private function displayAddNewPrd($conn){
+    //HTML codes before main form
+    echo "
+    <div class=\"header\">
+      CHAOS MART
+    </div>
+    <div class=\"title\">
+      <h1>ADD NEW PRODUCT</h1>
+    </div>
+    <div class=\"subtitle\">
+      <h3>Add new product by giving them product name, price, and initial quantity.
+      </h3>
+    </div>
+    ";
+    //HTML codes for the main form
+    echo"
+    <form class=\"add-new-product\" action=\"newProduct.php\" method=\"POST\">
+      <div class=\"form-rows\">
+        <div class=\"labels\">
+          <label for=\"prdname\" id=\"prdname-label\">Name</label>
+        </div>
+        <div class=\"fields\">
+          <input type=\"text\" id=\"prdname\" name=\"name\" class=\"input-fields\" placeholder=\"Enter the name for the product\" required>
+        </div>
+      </div>
+
+      <div class=\"form-rows\">
+        <div class=\"labels\">
+          <label for=\"prdprice\" id=\"prdprice-label\">Price</label>
+        </div>
+        <div class=\"fields\">
+          <input type=\"text\" id=\"prdprice\" name=\"price\" class=\"input-fields\" placeholder=\"Enter the price for the product\" required>
+        </div>
+      </div>
+
+      <div class=\"form-rows\">
+        <div class=\"labels\">
+          <label for=\"prdqtt\" id=\"prdqtt-label\">Quantity</label>
+        </div>
+        <div class=\"fields\">
+          <input type=\"text\" id=\"prdqtt\" name=\"qtt\" class=\"input-fields\" placeholder=\"Enter the initial quantity for the product\" required>
+        </div>
+      </div>
+
+      <button type=\"submit\" class=\"buttons\">ADD PRODUCT</button>
+      
+    </form>
+    ";
+    //HTML codes after the main form
+    echo "
+    <div class=\"footer\">
+      copyright &copy 2021, allright reserved.
+    </div>
     ";
   }
 
@@ -50,7 +149,7 @@ class ProductPage{
     $conn -> close();
   }
 
-  private function checkDBandTable(){
+  private function checkDBandTable($conn){
     //check if db exists. Create new db if not exists yet.
     $result = $conn->query("USE ".$this->db);
     if(!$result){
