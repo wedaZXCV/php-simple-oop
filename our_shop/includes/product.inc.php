@@ -1,22 +1,27 @@
 <?php 
-class Product{
+require_once "includes/productPage.inc.php";
+class Product extends ProductPage{
   private int $id;
   private string $title;
   private float $price;
   private int $availableQuantity;
+  private ProductPage $prdPage;
 
   // construct method happens while creating new class Object
   // it does defining action for class variables value based on arguments
   //given inside New object parenthesis
-  public function __construct($id, $title, $price, $availableQuantity){
+  public function __construct($id, $title, $price, $availableQuantity, \ProductPage $prdPage){
     $this->id = $id;
     $this->title = $title;
     $this->price = $price;
     $this->availableQuantity = $availableQuantity;
+    $this->prdPage = $prdPage;
   }
 
   public function addNewProduct(){
-    
+    $conn = $this->prdPage->connectDataBase();
+    $conn->query("INSERT INTO products VALUES($this->id, '$this->title', $this->price, $this->availableQuantity);");
+    $this->prdPage->closeDataBase($conn);
   }
 
   public function increaseQtty(){

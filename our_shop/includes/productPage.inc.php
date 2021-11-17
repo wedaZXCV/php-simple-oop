@@ -64,12 +64,7 @@ class ProductPage{
     </form>
     ";
     //HTML codes to call entries from mySQL
-    $result = $conn->query("SELECT * FROM products");
-    if ($result->num_rows > 0){
-      while($row = $result->fetch_assoc()) {
-        $this->displayListProduct($conn);
-      }
-    }
+    $this->displayListProduct($conn);
     //HTML codes after list table
     echo "
     </table>
@@ -136,7 +131,7 @@ class ProductPage{
     ";
   }
 
-  private function connectDataBase($withdb = TRUE){
+  protected function connectDataBase($withdb = TRUE){
     if($withdb == TRUE){
       $conn = new mysqli($this->dbhost, $this->dbuser, $this->dbpass, $this->db);
     } else{
@@ -145,7 +140,7 @@ class ProductPage{
     return $conn;
   }
 
-  private function closeDataBase($conn){
+  protected function closeDataBase($conn){
     $conn -> close();
   }
 

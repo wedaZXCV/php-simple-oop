@@ -85,9 +85,27 @@ the displayUI comes with add entries which will link the user from product.php t
 * product.php harness productPage.inc.php	>> the basic is done
 * newProduct.php harness product.inc.php	>> the basic is done
 
+product.inc.php add new product to database.	>> add product is done (success adding into database)
 PROGRESS NOW
-product.inc.php add new product to database.
+fix the product displaying of product list on product.php	>> done!
+<<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
+remove all product
 
+checkbox next to the each product
+on several items are checked:
+show [delete selected] to delete selected item (the button is at the top and bottom of the list item)
+
+on mouse hover at a row:
+appearing/disappearing delete button	(on the dead right side of each row)
+appearing/disappearing price input (next to each row's price)
+appearing/disappearing quantity input (next to each row's quantity)
+* the name cannot be edited. Consider creating product instance.
+
+auto increments id...
+
+pagination
+
+<<<<<<<<<<<<<<< END OF PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 
 require class from product.inc.php
 Note:

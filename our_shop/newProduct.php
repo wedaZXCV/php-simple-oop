@@ -10,11 +10,14 @@
   $dbpass = "Hinterrollover7<3";
   $db = "shopping";
   $prdPage = new ProductPage($dbhost, $dbuser, $dbpass, $db);
+  $prdPage->loadAddNewPrdPage();
   if(!isset($_POST["name"]) && !isset($_POST["price"]) && !isset($_POST["qtt"])){
-    $prdPage->loadAddNewPrdPage();
+    
   } else{
-    $productIns = new Product(1, $_POST["name"], $_POST["price"], $_POST["qtt"]);
+    $productIns = new Product(1, $_POST["name"], $_POST["price"], $_POST["qtt"], $prdPage);
+    $productIns->addNewProduct();
   }
+  
 
 
 
