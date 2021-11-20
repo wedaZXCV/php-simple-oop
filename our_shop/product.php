@@ -5,7 +5,7 @@
   1. Add product + quantity for stock + pricing
   2. Remove product
   */
-  require_once "includes/productPage.inc.php";
+  require "includes/productPage.inc.php";
 
   // 1. Create database and product table if none was exist
   $dbhost = "localhost:3306";

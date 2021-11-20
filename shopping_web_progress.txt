@@ -89,7 +89,7 @@ product.inc.php add new product to database.	>> add product is done (success add
 PROGRESS NOW
 fix the product displaying of product list on product.php	>> done!
 <<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
-remove all product
+remove all product		>> done!
 
 checkbox next to the each product
 on several items are checked:

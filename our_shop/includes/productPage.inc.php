@@ -19,6 +19,9 @@ class ProductPage{
     
     $this->displayUI($conn);
     $this->closeDataBase($conn);
+    // if($conn->ping() == TRUE){
+      
+    // }
   }
   // The initiator code for displaying on Add New Product Page
   public function loadAddNewPrdPage(){
@@ -63,6 +66,8 @@ class ProductPage{
       <button type=\"submit\" class=\"buttons\">ADD NEW PRODUCT</button>
     </form>
     ";
+    //HTML codes to remove all entries from mySQL
+    $this->clearAllProduct($conn);
     //HTML codes to call entries from mySQL
     $this->displayListProduct($conn);
     //HTML codes after list table
@@ -176,6 +181,14 @@ class ProductPage{
         ";
       }
     }
+  }
+
+  private function clearAllProduct($conn){
+    echo " 
+    <form action=\"includes/delete.php\" type=\"POST\">
+      <button type=\"submit\">Clear All</button>
+    </form>
+    ";
   }
 
   /**

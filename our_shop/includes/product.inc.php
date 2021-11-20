@@ -1,5 +1,5 @@
 <?php 
-require_once "includes/productPage.inc.php";
+require_once "productPage.inc.php";
 class Product extends ProductPage{
   private int $id;
   private string $title;
@@ -10,18 +10,21 @@ class Product extends ProductPage{
   // construct method happens while creating new class Object
   // it does defining action for class variables value based on arguments
   //given inside New object parenthesis
-  public function __construct($id, $title, $price, $availableQuantity, \ProductPage $prdPage){
-    $this->id = $id;
-    $this->title = $title;
-    $this->price = $price;
-    $this->availableQuantity = $availableQuantity;
+  public function __construct(\ProductPage $prdPage){
     $this->prdPage = $prdPage;
   }
 
-  public function addNewProduct(){
+  public function addNewProduct($id, $title, $price, $availableQuantity){
     $conn = $this->prdPage->connectDataBase();
-    $conn->query("INSERT INTO products VALUES($this->id, '$this->title', $this->price, $this->availableQuantity);");
+    $conn->query("INSERT INTO products VALUES($id, '$title', $price, $availableQuantity);");
     $this->prdPage->closeDataBase($conn);
+  }
+
+  public function clearAllProduct(){
+    $conn = $this->prdPage->connectDataBase();
+    $conn->query("DELETE FROM products");
+    $this->prdPage->closeDataBase($conn);
+    header("Location: ../product.php", TRUE, 301);
   }
 
   public function increaseQtty(){

@@ -1,6 +1,6 @@
 <?php 
-  require_once "includes/product.inc.php";
-  require_once "includes/productPage.inc.php";
+  require "includes/product.inc.php";
+  require "includes/productPage.inc.php";
   echo"
   <h1>Successfully change to new product page    </h1>
   ";
@@ -14,8 +14,8 @@
   if(!isset($_POST["name"]) && !isset($_POST["price"]) && !isset($_POST["qtt"])){
     
   } else{
-    $productIns = new Product(1, $_POST["name"], $_POST["price"], $_POST["qtt"], $prdPage);
-    $productIns->addNewProduct();
+    $productIns = new Product($prdPage);
+    $productIns->addNewProduct(1, $_POST["name"], $_POST["price"], $_POST["qtt"]);
   }
   
 
