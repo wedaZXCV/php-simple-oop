@@ -1,6 +1,6 @@
 <?php 
-  require "includes/product.inc.php";
-  require "includes/productPage.inc.php";
+  require_once "includes/product.inc.php";
+  require_once "includes/productPage.inc.php";
   echo"
   <h1>Successfully change to new product page    </h1>
   ";
