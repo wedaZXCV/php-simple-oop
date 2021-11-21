@@ -15,7 +15,7 @@
     
   } else{
     $productIns = new Product($prdPage);
-    $productIns->addNewProduct(1, $_POST["name"], $_POST["price"], $_POST["qtt"]);
+    $productIns->addNewProduct($_POST["id"], $_POST["name"], $_POST["price"], $_POST["qtt"]);
   }
   
 

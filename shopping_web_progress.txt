@@ -92,6 +92,7 @@ fix the product displaying of product list on product.php	>> done!
 remove all product		>> done!
 
 checkbox next to the each product
+
 on several items are checked:
 show [delete selected] to delete selected item (the button is at the top and bottom of the list item)
 
@@ -99,7 +100,7 @@ on mouse hover at a row:
 appearing/disappearing delete button	(on the dead right side of each row)
 appearing/disappearing price input (next to each row's price)
 appearing/disappearing quantity input (next to each row's quantity)
-* the name cannot be edited. Consider creating product instance.
+* the name cannot be edited. Consider creating new product instance.
 
 auto increments id...
 

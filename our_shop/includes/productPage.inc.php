@@ -68,11 +68,16 @@ class ProductPage{
     ";
     //HTML codes to remove all entries from mySQL
     $this->clearAllProduct($conn);
+    echo"<br>
+    <form action=\"functions/deleteChecked.php\" method=\"POST\">
+    ";
     //HTML codes to call entries from mySQL
     $this->displayListProduct($conn);
     //HTML codes after list table
     echo "
     </table>
+      <button type=\"submit\">Delete checked</button>
+    </form>
     </div>
     <div class=\"footer\">
       copyright &copy 2021, allright reserved.
@@ -97,6 +102,15 @@ class ProductPage{
     //HTML codes for the main form
     echo"
     <form class=\"add-new-product\" action=\"newProduct.php\" method=\"POST\">
+      <div class=\"form-rows\">
+        <div class=\"labels\">
+          <label for=\"prdid\" id=\"prdid-label\">ID</label>
+        </div>
+        <div class=\"fields\">
+          <input type=\"text\" id=\"prdid\" name=\"id\" class=\"input-fields\" placeholder=\"Enter the id for the product\" required>
+        </div>
+      </div>
+
       <div class=\"form-rows\">
         <div class=\"labels\">
           <label for=\"prdname\" id=\"prdname-label\">Name</label>
@@ -172,12 +186,13 @@ class ProductPage{
     if($result->num_rows > 0){
       while($row = $result->fetch_assoc()){
         echo "
-        <tr>
-          <td>".$row["id"]."</td>
-          <td>".$row["name"]."</td>
-          <td>".$row["price"]."</td>
-          <td>".$row["qtt"]."</td>
-        </tr>
+          <tr>
+            <td><input type=\"checkbox\" id=\"itemid".$row["id"]."\" name=\"item[]\" value=\"".$row["id"]."\"></td>
+            <td>".$row["id"]."</td>
+            <td>".$row["name"]."</td>
+            <td>".$row["price"]."</td>
+            <td>".$row["qtt"]."</td>
+          </tr>
         ";
       }
     }

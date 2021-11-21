@@ -10,13 +10,4 @@
   $prdPage = new ProductPage($dbhost, $dbuser, $dbpass, $db);
   $productIns = new Product($prdPage);
   $productIns->clearAllProduct();
-
-
-
-
-
-
-
-
-
 ?>
