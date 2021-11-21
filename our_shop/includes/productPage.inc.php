@@ -185,7 +185,7 @@ class ProductPage{
 
   private function clearAllProduct($conn){
     echo " 
-    <form action=\"includes/delete.php\" type=\"POST\">
+    <form action=\"functions/delete.php\" type=\"POST\">
       <button type=\"submit\">Clear All</button>
     </form>
     ";
