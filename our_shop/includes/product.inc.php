@@ -27,6 +27,14 @@ class Product extends ProductPage{
     header("Location: ../product.php", TRUE, 301);
   }
 
+  public function deleteSelected($itemArray){
+    $conn = $this->prdPage->connectDataBase();
+    $ids = implode(", ", $itemArray);
+    $conn->query("DELETE FROM products WHERE id IN (".$ids.")");
+    $this->prdPage->closeDataBase($conn);
+    header("Location: ../product.php", TRUE, 301);
+  }
+
   public function increaseQtty(){
 
   }

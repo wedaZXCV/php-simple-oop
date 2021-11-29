@@ -1,0 +1,19 @@
+.item-table{
+  width:100%;
+}
+
+.item-table th, .item-table td{
+  border: 3px solid #ffffff;
+}
+
+.item-table th{
+  height: 70px;
+}
+
+tr > .one-delete-td{
+  display: none;
+}
+
+tr:hover > .one-delete-td{
+  display: inline-block;
+}

@@ -91,13 +91,15 @@ fix the product displaying of product list on product.php	>> done!
 <<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 remove all product		>> done!
 
-checkbox next to the each product
+checkbox next to the each product	>> done!
 
 on several items are checked:
 show [delete selected] to delete selected item (the button is at the top and bottom of the list item)
+>>>> successfully delete the selected item from database.
 
 on mouse hover at a row:
-appearing/disappearing delete button	(on the dead right side of each row)
+appearing/disappearing delete button	(on the dead right side of each row)  << done! with id indexing. *still require add the delete functionality on database ( on product.inc.php)
+
 appearing/disappearing price input (next to each row's price)
 appearing/disappearing quantity input (next to each row's quantity)
 * the name cannot be edited. Consider creating new product instance.

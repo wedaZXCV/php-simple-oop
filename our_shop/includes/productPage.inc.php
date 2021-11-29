@@ -50,16 +50,7 @@ class ProductPage{
         Use the bellow checkbox to choose every item to be cleared, or hover mouse over an item to change its
         quantity and/or price. Delete individual item one by one is also available.
       </h3>
-    </div>
-    <div class=\"item-table-container\">
-      <table class=\"item-table\">
-        <tr>
-          <th>Id</th>
-          <th>Name of product</th>
-          <th>Price</th>
-          <th>Quantity in stock</th>
-        </tr>
-    ";
+    </div>";
     //HTML codes to add new entries to mySQL
     echo "
     <form class=\"product-main-page-btn\" action=\"newProduct.php\" method=\"POST\">
@@ -68,15 +59,25 @@ class ProductPage{
     ";
     //HTML codes to remove all entries from mySQL
     $this->clearAllProduct($conn);
-    echo"<br>
-    <form action=\"functions/deleteChecked.php\" method=\"POST\">
+
+    echo "<div class=\"item-table-container\">
+    <form action=\"functions/delete.php\" method=\"POST\">
+      <table class=\"item-table\">
+        <tr>
+          <th></th>
+          <th>Id</th>
+          <th>Name of product</th>
+          <th>Price</th>
+          <th>Quantity in stock</th>
+          <th></th>
+        </tr>
     ";
     //HTML codes to call entries from mySQL
     $this->displayListProduct($conn);
     //HTML codes after list table
     echo "
     </table>
-      <button type=\"submit\">Delete checked</button>
+      <button type=\"submit\" name=\"all\">Delete checked</button>
     </form>
     </div>
     <div class=\"footer\">
@@ -187,11 +188,16 @@ class ProductPage{
       while($row = $result->fetch_assoc()){
         echo "
           <tr>
+          
             <td><input type=\"checkbox\" id=\"itemid".$row["id"]."\" name=\"item[]\" value=\"".$row["id"]."\"></td>
             <td>".$row["id"]."</td>
             <td>".$row["name"]."</td>
             <td>".$row["price"]."</td>
             <td>".$row["qtt"]."</td>
+            <td class=\"one-delete-td\">
+              <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>
+            </td>
+          
           </tr>
         ";
       }
@@ -200,7 +206,7 @@ class ProductPage{
 
   private function clearAllProduct($conn){
     echo " 
-    <form action=\"functions/delete.php\" type=\"POST\">
+    <form action=\"functions/deleteAll.php\" type=\"POST\">
       <button type=\"submit\">Clear All</button>
     </form>
     ";
