@@ -101,7 +101,11 @@ on mouse hover at a row:
 appearing/disappearing delete button	(on the dead right side of each row)  << done! with id indexing. *still require add the delete functionality on database ( on product.inc.php) << done!
 
 appearing/disappearing price input (next to each row's price)
+
 appearing/disappearing quantity input (next to each row's quantity)
+
+* price input and quantity input has checkmark just next to it as an apply button
+* place on split cell for them
 * the name cannot be edited. Consider creating new product instance.
 
 auto increments id...

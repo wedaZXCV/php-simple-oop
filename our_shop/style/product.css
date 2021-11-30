@@ -19,7 +19,10 @@
   border: 0px solid #ffffff;
 }
 
-
+.item-table .modifier{
+  text-align: right;
+  width: 30px;
+}
 
 /*the animation start from here to bellow*/
 .one-delete-td{

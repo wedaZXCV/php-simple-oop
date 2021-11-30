@@ -67,8 +67,8 @@ class ProductPage{
           <th class=\"cb-th\"></th>
           <th>Id</th>
           <th>Name of product</th>
-          <th>Price</th>
-          <th>Quantity in stock</th>
+          <th colspan=\"2\">Price</th>
+          <th colspan=\"2\">Quantity in stock</th>
           <th class=\"button-th\"></th>
         </tr>
     ";
@@ -190,10 +190,16 @@ class ProductPage{
           <tr>
           
             <td><input type=\"checkbox\" id=\"itemid".$row["id"]."\" name=\"item[]\" value=\"".$row["id"]."\"></td>
+            
             <td>".$row["id"]."</td>
             <td>".$row["name"]."</td>
+
             <td>".$row["price"]."</td>
+            <td class=\"modifier\">Some</td>
+
             <td class=\"quantity-td\">".$row["qtt"]."</td>
+            <td class=\"modifier\">Some</td>
+
             <td class=\"one-delete-td\">
               <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>
             </td>
