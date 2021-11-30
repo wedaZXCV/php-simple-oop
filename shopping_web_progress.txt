@@ -98,7 +98,7 @@ show [delete selected] to delete selected item (the button is at the top and bot
 >>>> successfully delete the selected item from database.
 
 on mouse hover at a row:
-appearing/disappearing delete button	(on the dead right side of each row)  << done! with id indexing. *still require add the delete functionality on database ( on product.inc.php)
+appearing/disappearing delete button	(on the dead right side of each row)  << done! with id indexing. *still require add the delete functionality on database ( on product.inc.php) << done!
 
 appearing/disappearing price input (next to each row's price)
 appearing/disappearing quantity input (next to each row's quantity)

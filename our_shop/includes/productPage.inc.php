@@ -64,12 +64,12 @@ class ProductPage{
     <form action=\"functions/delete.php\" method=\"POST\">
       <table class=\"item-table\">
         <tr>
-          <th></th>
+          <th class=\"cb-th\"></th>
           <th>Id</th>
           <th>Name of product</th>
           <th>Price</th>
           <th>Quantity in stock</th>
-          <th></th>
+          <th class=\"button-th\"></th>
         </tr>
     ";
     //HTML codes to call entries from mySQL
@@ -193,7 +193,7 @@ class ProductPage{
             <td>".$row["id"]."</td>
             <td>".$row["name"]."</td>
             <td>".$row["price"]."</td>
-            <td>".$row["qtt"]."</td>
+            <td class=\"quantity-td\">".$row["qtt"]."</td>
             <td class=\"one-delete-td\">
               <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>
             </td>

@@ -10,14 +10,9 @@ $db = "shopping";
 $prdPage = new ProductPage($dbhost, $dbuser, $dbpass, $db);
 $productIns = new Product($prdPage);
 if(isset($_POST["all"])){
-  //$productIns->deleteSelected($_POST["item"]);
-  echo "delete checked, id(s) are: ";
-  foreach($_POST["item"] as $value){
-    echo($value).", ";
-  }
+  $productIns->deleteSelected($_POST["item"]);
 } else if(isset($_POST["one"])){
-  //$productIns->deleteOne($_POST["item"]);
-  echo "delete one, id no-".$_POST["one"];
+  $productIns->deleteOne($_POST["one"]);
 } else{
   echo "Error occured while doing the function, check delete button access";
 }

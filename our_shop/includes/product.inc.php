@@ -35,6 +35,13 @@ class Product extends ProductPage{
     header("Location: ../product.php", TRUE, 301);
   }
 
+  public function deleteOne($itemID){
+    $conn = $this->prdPage->connectDataBase();
+    $conn->query("DELETE FROM products WHERE id=".$itemID."");
+    $this->prdPage->closeDataBase($conn);
+    header("Location: ../product.php", TRUE, 301);
+  }
+
   public function increaseQtty(){
 
   }

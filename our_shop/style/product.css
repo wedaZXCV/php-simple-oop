@@ -10,10 +10,46 @@
   height: 70px;
 }
 
-tr > .one-delete-td{
-  display: none;
+.item-table .button-th{
+  border: 0px solid #ffffff;
+  width: 75px;
 }
 
-tr:hover > .one-delete-td{
-  display: inline-block;
+.item-table .cb-th{
+  border: 0px solid #ffffff;
+}
+
+
+
+/*the animation start from here to bellow*/
+.one-delete-td{
+  /*animation needs*/
+  display: none;
+  opacity: 0;
+
+}
+
+.item-table tr:hover .one-delete-td{
+  /*border displaying*/
+  border: 0px solid #ffffff;
+
+  /*animation needs*/
+  display: inline;
+  opacity: 1;
+  
+  /* "both" tells the browser to use the above opacity at the end of the animation (best practice) */
+  -webkit-animation: display-none-transition 1s both;
+  animation: display-none-transition 1s both;
+}
+
+@-webkit-keyframes display-none-transition{
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes display-none-transition{
+  0% {
+    opacity: 0;
+  }
 }
