@@ -86,7 +86,7 @@ the displayUI comes with add entries which will link the user from product.php t
 * newProduct.php harness product.inc.php	>> the basic is done
 
 product.inc.php add new product to database.	>> add product is done (success adding into database)
-PROGRESS NOW
+
 fix the product displaying of product list on product.php	>> done!
 <<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 remove all product		>> done!
@@ -100,9 +100,14 @@ show [delete selected] to delete selected item (the button is at the top and bot
 on mouse hover at a row:
 appearing/disappearing delete button	(on the dead right side of each row)  << done! with id indexing. *still require add the delete functionality on database ( on product.inc.php) << done!
 
+PROGRESS NOW
 appearing/disappearing price input (next to each row's price)
+progress:
+the standard displaying is done, but the linking to correct php function is still not working.
 
 appearing/disappearing quantity input (next to each row's quantity)
+progress:
+the standard displaying is done, but the linking to correct php function is still not working.
 
 * price input and quantity input has checkmark just next to it as an apply button
 * place on split cell for them

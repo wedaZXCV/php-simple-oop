@@ -195,10 +195,20 @@ class ProductPage{
             <td>".$row["name"]."</td>
 
             <td>".$row["price"]."</td>
-            <td class=\"modifier\">Some</td>
+            <td class=\"modifier-price\">
+              <form action=\"functions/modify.php\" method=\"POST\">
+                <input type=\"number\" name=\"priceMod\" min=0 class=\"numModifier priceMod\">
+                <button type=\"submit\" class=\"confirmModifier\">&#10004;</button>
+              </form>
+            </td>
 
             <td class=\"quantity-td\">".$row["qtt"]."</td>
-            <td class=\"modifier\">Some</td>
+            <td class=\"modifier-qtt\">
+              <form action=\"functions/modify.php\" method=\"POST\">
+                <input type=\"number\" name=\"qttMod\" min=0 class=\"numModifier qttMod\">
+                <button type=\"submit\" class=\"confirmModifier\">&#10004;</button>
+              </form>
+            </td>
 
             <td class=\"one-delete-td\">
               <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>

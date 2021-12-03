@@ -19,12 +19,43 @@
   border: 0px solid #ffffff;
 }
 
-.item-table .modifier{
+.item-table .modifier-price{
   text-align: right;
-  width: 30px;
+  width: 120px;
 }
 
+.item-table .modifier-qtt{
+  text-align: right;
+  width: 90px;
+  
+}
+
+.item-table .priceMod{
+  display: inline-block;
+  height: 35px;
+  width: 75px;
+}
+
+.item-table .qttMod{
+  display: inline-block;
+  height: 35px;
+  width: 55px;
+}
+
+/*number input arrows, not available for price input*/
+input.priceMod::-webkit-outer-spin-button,
+input.priceMod::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.priceMod[type=number]{
+  -moz-appearance: textfield;
+}
+
+
 /*the animation start from here to bellow*/
+/*delete one item animation*/
 .one-delete-td{
   /*animation needs*/
   display: none;
@@ -56,3 +87,19 @@
     opacity: 0;
   }
 }
+/*END of delete one item animation*/
+
+.item-table .confirmModifier{
+  display: inline-block;
+  border: none;
+  color: black;
+}
+
+.item-table .confirmModifier:hover{
+  color: yellowgreen;
+}
+
+.item-table .confirmModifier:active{
+  color: red;
+}
+
