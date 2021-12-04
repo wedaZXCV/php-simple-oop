@@ -104,6 +104,7 @@ PROGRESS NOW
 appearing/disappearing price input (next to each row's price)
 progress:
 the standard displaying is done, but the linking to correct php function is still not working.
+solution is using link. We can not modify it in the same page. So we need link via number to access modify.php
 
 appearing/disappearing quantity input (next to each row's quantity)
 progress:
