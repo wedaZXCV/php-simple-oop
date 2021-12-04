@@ -81,7 +81,7 @@ class ProductPage{
     </form>
     </div>
     <div class=\"footer\">
-      copyright &copy 2021, allright reserved.
+      copyright &copy HinterRollover 2021, allright reserved.
     </div>
     ";
   }
@@ -194,9 +194,9 @@ class ProductPage{
             <td>".$row["id"]."</td>
             <td>".$row["name"]."</td>
 
-            <td><a href=\"functions/modify.php?price=".$row["price"]."&name=".$row["name"]."&qtt=".$row["qtt"]."\">".$row["price"]."</a></td>
+            <td><a href=\"functions/modify.php?price=".$row["price"]."&name=".$row["name"]."&qtt=".$row["qtt"]."&id=".$row["id"]."\">".$row["price"]."</a></td>
 
-            <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$row["qtt"]."&name=".$row["name"]."&price=".$row["price"]."\">".$row["qtt"]."</a></td>
+            <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$row["qtt"]."&name=".$row["name"]."&price=".$row["price"]."&id=".$row["id"]."\">".$row["qtt"]."</a></td>
 
             <td class=\"one-delete-td\">
               <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>

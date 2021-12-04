@@ -42,6 +42,13 @@ class Product extends ProductPage{
     header("Location: ../product.php", TRUE, 301);
   }
 
+  public function modifyPriceQtt($price, $qtt, $id){
+    $conn = $this->prdPage->connectDataBase();
+    $conn->query("UPDATE products SET price='$price', qtt='$qtt' WHERE id='$id';");
+    $this->prdPage->closeDataBase($conn);
+    header("Location: ../product.php", TRUE, 301);
+  }
+
   public function increaseQtty(){
 
   }
