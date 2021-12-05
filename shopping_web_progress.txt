@@ -119,9 +119,16 @@ DONE !!!   << we are not using in page quantity modifier, but re-directing into 
 * place on split cell for them								<< no need, currently using huperlink tag
 * the name cannot be edited. Consider creating new product instance.
 
-auto increments id...
+auto increments id...   << relates with add new product    << done!!
+
+sort by:
+	the sort functionality can be defined by id, name, price, and quantity in stock.
+	default, initial sorting is by name.		   << done!!
+
 
 pagination
+
+
 
 <<<<<<<<<<<<<<< END OF PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 

@@ -65,15 +65,19 @@ class ProductPage{
       <table class=\"item-table\">
         <tr>
           <th class=\"cb-th\"></th>
-          <th>Id</th>
-          <th>Name of product</th>
-          <th>Price</th>
-          <th>Quantity in stock</th>
+          <th><a href=\"product.php?sort=id\">Id</a></th>
+          <th><a href=\"product.php?sort=name\">Name of product</a></th>
+          <th><a href=\"product.php?sort=price\">Price</a></th>
+          <th><a href=\"product.php?sort=qtt\">Quantity in stock</a></th>
           <th class=\"button-th\"></th>
         </tr>
     ";
     //HTML codes to call entries from mySQL
-    $this->displayListProduct($conn);
+    if(!isset($_GET["sort"])){
+      $this->displayListProduct($conn);
+    } else{
+      $this->displayListProduct($conn, $_GET["sort"]);
+    }
     //HTML codes after list table
     echo "
     </table>
@@ -173,8 +177,22 @@ class ProductPage{
     }
   }
 
-  private function displayListProduct($conn){
-    $result = $conn->query("SELECT * FROM products");
+  //the function also takes sorting mode for the display
+  private function displayListProduct($conn, $sort="name"){
+    // the product items is sorted by name by default
+    if($sort == "id"){
+      $result = $conn->query("SELECT * FROM products ORDER BY id");
+    }else if($sort == "name"){
+      $result = $conn->query("SELECT * FROM products ORDER BY name");
+    } else if($sort == "price"){
+      $result = $conn->query("SELECT * FROM products ORDER BY price");
+    } else if($sort == "qtt"){
+      $result = $conn->query("SELECT * FROM products ORDER BY qtt");
+      //default
+    } else{
+      echo "something wrong with the displaying functionality";
+    }
+    
     if($result->num_rows > 0){
       while($row = $result->fetch_assoc()){
         echo "
