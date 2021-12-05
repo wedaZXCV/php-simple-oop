@@ -112,7 +112,6 @@ progress:
 the standard displaying is done, but the linking to correct php function is still not working.
 
 DONE !!!   << we are not using in page quantity modifier, but re-directing into new page and there makes changes (hyperlink tag)
-
 }
 
 * price input and quantity input has checkmark just next to it as an apply button	<< no need, currently using huperlink tag
@@ -126,8 +125,21 @@ sort by:
 	default, initial sorting is by name.		   << done!!
 
 
-pagination
+pagination:
+	pagination is right before item table
+	*note: the pagination will change most of the displaying method, especially on displayListProduct function. So here is the new algorithm:
 
+	$this->fetchData()	<< on fetch data, we are doing assigning $row into new usable array.
+	$this->paginationDisplay()	<< we manage pagination based on the new array.
+	$this->displayListProduct()	<< display using new array.
+PROGRESS NOW
+# finish the paginationDisplay
+# re-factor the displayListProduct()
+PROGRESS NOW
+# follow the error  << especially on unserialize error
+
+search-bar:
+	search-bar is above pagination, under Clear All, right side of the web page.
 
 
 <<<<<<<<<<<<<<< END OF PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>

@@ -33,7 +33,19 @@ class ProductPage{
   // the HTML routines comes into main php of product page(product.php)
   // So now here, the <div> parts only
   // the displayUI bellow is for main Product Page
-  private function displayUI($conn){
+  private function displayUI($conn, $displaying = 15, $minimalPages = 11){
+    // firstly first, do retreive data from SQL server. The data to display by the UI
+    if(!isset($_POST["pagination-clicked"])){
+      if(!isset($_GET["sort"])){
+        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn);
+      } else{
+        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn, $_GET["sort"]);
+      }
+    } else{
+      // do not do the fetch anymore if pagination button was clicked
+    }
+    
+    
     //HTML codes before list table
     echo "
     <div class=\"header\">
@@ -57,8 +69,11 @@ class ProductPage{
       <button type=\"submit\" class=\"buttons\">ADD NEW PRODUCT</button>
     </form>
     ";
-    //HTML codes to remove all entries from mySQL
+
+    //HTML codes for displaying some functionalities
     $this->clearAllProduct($conn);
+    //$this->searchProduct($conn);
+    $this->paginationDisplay($conn, $totalItem, $displaying, $minimalPages, $idArr, $nameArr, $priceArr, $qttArr);
 
     echo "<div class=\"item-table-container\">
     <form action=\"functions/delete.php\" method=\"POST\">
@@ -73,11 +88,8 @@ class ProductPage{
         </tr>
     ";
     //HTML codes to call entries from mySQL
-    if(!isset($_GET["sort"])){
-      $this->displayListProduct($conn);
-    } else{
-      $this->displayListProduct($conn, $_GET["sort"]);
-    }
+    $this->displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr);
+    
     //HTML codes after list table
     echo "
     </table>
@@ -177,8 +189,8 @@ class ProductPage{
     }
   }
 
-  //the function also takes sorting mode for the display
-  private function displayListProduct($conn, $sort="name"){
+  // Here is also doing sorting mode for the display
+  private function fetchData($conn, $sort="name"){
     // the product items is sorted by name by default
     if($sort == "id"){
       $result = $conn->query("SELECT * FROM products ORDER BY id");
@@ -192,29 +204,87 @@ class ProductPage{
     } else{
       echo "something wrong with the displaying functionality";
     }
-    
+
+    //assign every data into new array
     if($result->num_rows > 0){
+      $idArr = array();
+      $nameArr = array();
+      $priceArr = array();
+      $qttArr = array();
       while($row = $result->fetch_assoc()){
-        echo "
-          <tr>
-          
-            <td><input type=\"checkbox\" id=\"itemid".$row["id"]."\" name=\"item[]\" value=\"".$row["id"]."\"></td>
-            
-            <td>".$row["id"]."</td>
-            <td>".$row["name"]."</td>
-
-            <td><a href=\"functions/modify.php?price=".$row["price"]."&name=".$row["name"]."&qtt=".$row["qtt"]."&id=".$row["id"]."\">".$row["price"]."</a></td>
-
-            <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$row["qtt"]."&name=".$row["name"]."&price=".$row["price"]."&id=".$row["id"]."\">".$row["qtt"]."</a></td>
-
-            <td class=\"one-delete-td\">
-              <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$row["id"]."\">DELETE</button>
-            </td>
-          
-          </tr>
-        ";
+        array_push($idArr, $row["id"]);
+        array_push($nameArr, $row["name"]);
+        array_push($priceArr, $row["price"]);
+        array_push($qttArr, $row["qtt"]);
       }
     }
+    //serialize to make compact version, for return value
+    $idArr = htmlentities(serialize($idArr));
+    $nameArr = htmlentities(serialize($nameArr));
+    $priceArr = htmlentities(serialize($priceArr));
+    $qttArr = htmlentities(serialize($qttArr));
+
+    $totalItem = $result->num_rows;
+    //returns all of the entry arrays and the $totalItem for pagination
+    return [$idArr, $nameArr, $priceArr, $qttArr, $totalItem];
+  }
+
+  
+  private function displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr){
+    //unserialize first
+    //$nameArr = unserialize($_POST['array_data']);  << for example
+    $newidArr = unserialize($idArr);
+    $newnameArr = unserialize($nameArr);
+    $newpriceArr = unserialize($priceArr);
+    $newqttArr = unserialize($qttArr);
+
+    $pageNumber = $_POST["page-number"];
+
+    // define start index location of current page
+    if(!isset($_POST["pagination-clicked"])){
+      $itemStartIndex = 0;
+    } else{
+      $itemStartIndex = $pageNumber * $displaying - $displaying;
+    }
+
+    // later, print only $displaying items
+    $displayID = $this->prepareListEntryDisplay($newidArr, $itemStartIndex);
+    $displayName = $this->prepareListEntryDisplay($newnameArr, $itemStartIndex);
+    $displayPrice = $this->prepareListEntryDisplay($newpriceArr, $itemStartIndex);
+    $displayQtt = $this->prepareListEntryDisplay($newqttArr, $itemStartIndex);
+    
+    foreach($displayID as $key=>$value){
+      echo "
+      <tr>
+        <td><input type=\"checkbox\" id=\"itemid".$displayID[$key]."\" name=\"item[]\" value=\"".$displayID[$key]."\"></td>
+        
+        <td>".$displayID[$key]."</td>
+        <td>".$displayName[$key]."</td>
+
+        <td><a href=\"functions/modify.php?price=".$displayPrice[$key]."&name=".$displayName[$key]."&qtt=".$row["qtt"]."&id=".$displayID[$key]."\">".$displayPrice[$key]."</a></td>
+
+        <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$displayQtt[$key]."&name=".$displayName[$key]."&price=".$displayPrice[$key]."&id=".$displayID[$key]."\">".$displayQtt[$key]."</a></td>
+
+        <td class=\"one-delete-td\">
+          <button type=\"submit\" class=\"one-delete-btn\" name=\"one\" value=\"".$displayID[$key]."\">DELETE</button>
+        </td>
+      
+      </tr>
+    ";
+    }
+
+  }
+
+  private function prepareListEntryDisplay($arrayEntry, $itemStartIndex){
+    $displayArr = array();
+    for($i = $itemStartIndex; $i < ($itemStartIndex+$displaying); $i++){        
+      // if the $arrayEntry[$i] is null, so break loop
+      if(!isset($arrayEntry[$i])){
+        break;
+      }
+      array_push($displayArr, $arrayEntry[$i]);
+    }
+    return $displayArr;
   }
 
   private function clearAllProduct($conn){
@@ -223,6 +293,145 @@ class ProductPage{
       <button type=\"submit\">Clear All</button>
     </form>
     ";
+  }
+
+  private function paginationDisplay($conn, $totalItem, $displaying, $minimalPages, $idArr, $nameArr, $priceArr, $qttArr){
+    // firstly first get the $pages from $totalItem and $displaying
+    $pages = ceil($totalItem / $displaying);
+
+    // Add hidden form to confirm when any pagination button is clicked
+    echo "
+    <form action=\"product.php\" method=\"post\">
+      <!-- pagination-clicked to check if it's no need to query anymore,
+        the next display will be not initial display anymore-->
+      <input type=\"hidden\" name=\"pagination-clicked\" value=\"True\">
+
+      <!-- data arrays which are the data fetched from SQL, already sorted.
+        Is passed to the next page (every page of pagination)-->
+      <input type=\"hidden\" name=\"id-array\" value=\"".$idArr."\">
+      <input type=\"hidden\" name=\"name-array\" value=\"".$nameArr."\">
+      <input type=\"hidden\" name=\"price-array\" value=\"".$priceArr."\">
+      <input type=\"hidden\" name=\"qtt-array\" value=\"".$qttArr."\">
+    </form>
+    ";
+
+    // $pages reachs minimal amount for displaying in accordion
+    // basically, accordion format simplifies the display from being too much
+    if($pages >= $minimalPages){
+      //#1 initial displaying  << always page number 1
+      if(!isset($_POST["page-number"])){
+        for($i = 1; $i <= 3; $i++){
+          echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+        }
+        echo "<div class=\"t-dot-pages\"> ... </div>";
+        for($i = $pages-2; $i <= $pages; $i++){
+          echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+        }
+
+        // highlight page number 1
+        echo "<style type=\"text/css\">
+        #pb-1{
+          border-style: solid;
+          border-color: red;
+        }
+        </style>";
+
+      //#2 checking current page location  << for clicked page number
+      } else{
+        // check if the selected page number is at near the top start or top end
+        if(($_POST["page-number"]>=1 && $_POST["page-number"]<=2) || ($_POST["page-number"]>=$pages-1 && $_POST["page-number"]<=$pages)){
+          for($i = 1; $i <= 3; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          }
+          echo "<div class=\"t-dot-pages\"> ... </div>";
+          for($i = $pages-2; $i <= $pages; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          } 
+
+          // check if the selected page number is at pre-center or center point
+          // at pre-center point, like 3 and $pages-2
+        } else if($_POST["page-number"] == 3 || $_POST["page-number"] == $pages-2){
+          for($i = 1; $i <= 3; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          }
+          echo "<div class=\"t-dot-pages\"> ... </div>";
+          // the 3 or the $pages-2?
+          if($_POST["page-number"] == 3){
+            for($i = 3+1; $i <= 3+1+4; $i++){
+              echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+            }
+          } else if($_POST["page-number"] == $pages-2){
+            for($i = $pages-7; $i <= $pages-7+4; $i++){
+              echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+            } 
+          }
+          echo "<div class=\"t-dot-pages\"> ... </div>";
+          for($i = $pages-2; $i <= $pages; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          }
+          
+          // at center point
+        } else {
+          for($i = 1; $i <= 3; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          } 
+          echo "<div class=\"t-dot-pages\"> ... </div>";
+          
+          // here the current page number can be set as the mid point
+          if($_POST["page-number"]-2 > 3 && $_POST["page-number"]+2 < $pages-2){
+            for($i = $_POST["page-number"]-2; $i < $_POST["page-number"]-2+5; $i++){
+              echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+            }
+          } 
+          // here the current page number can not be set as the mid point
+          else {
+            // Where is the loc? near start or end?
+            if($_POST["page-number"] <= 3+2){
+              $itt = 3+1;
+              for($i = $itt; $i < $itt+5; $i++){
+                echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+              }
+            } else if($_POST["page-number"] >= ($pages-2)-2){
+              $itt = $pages-7;
+              for($i = $itt; $i < $itt+5; $i++){
+                echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+              }
+            }
+          }
+          echo "<div class=\"t-dot-pages\"> ... </div>";
+          for($i = $pages-2; $i <= $pages; $i++){
+            echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+          }
+        }
+      }
+
+    // on the other hand, $pages doesn't reach minimal amount, meaning we don't need accordion
+    } else{
+      // No accordion, meaning pagination has same displaying
+      for($i = 1; $i <= $pages; $i++){
+        echo "<button type=\"submit\" name=\"page-number\" value=\"".$i."\" class=\"pagination-button\" id=\"pb-".$i."\">".$i."</button>";
+      }
+      //#1 initial displaying  << always page number 1
+      if(!isset($_POST["page-number"])){
+        // highlight page number 1
+        echo "<style type=\"text/css\">
+        #pb-1{
+          border-style: solid;
+          border-color: red;
+        }
+        </style>";
+
+      //#2 checking current page location  << for clicked page number
+      } else{
+        // highlight the current page-number
+        echo "<style type=\"text/css\">
+        #pb-".$_POST["page-number"]."{
+          border-style: solid;
+          border-color: red;
+        }
+        </style>";
+      }
+    }
   }
 
   /**
