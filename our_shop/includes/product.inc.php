@@ -14,8 +14,9 @@ class Product extends ProductPage{
     $this->prdPage = $prdPage;
   }
 
-  public function addNewProduct($id, $title, $price, $availableQuantity){
+  public function addNewProduct($title, $price, $availableQuantity){
     $conn = $this->prdPage->connectDataBase();
+    $id = $this->autoGenerateID($conn);
     $conn->query("INSERT INTO products VALUES($id, '$title', $price, $availableQuantity);");
     $this->prdPage->closeDataBase($conn);
   }
@@ -47,6 +48,41 @@ class Product extends ProductPage{
     $conn->query("UPDATE products SET price='$price', qtt='$qtt' WHERE id='$id';");
     $this->prdPage->closeDataBase($conn);
     header("Location: ../product.php", TRUE, 301);
+  }
+
+  private function autoGenerateID($conn){
+    $result = $conn->query("SELECT id FROM products ORDER BY id;");
+    $arrayNew = array();
+    if ($result->num_rows > 0){
+      $itt = 0;
+      $idt = 0;
+      while($row = $result->fetch_assoc()) {
+        array_push($arrayNew, $row["id"]);
+        if($itt == 0){
+          if($row["id"] != 0){
+            $idt = 0;
+            break;
+          } else {
+            $idt = $row["id"]+1;
+            // no break;
+          }
+        } else {
+          // jumping case
+          if(($row["id"] - $temp) > 1){
+            $idt = $temp + 1;
+            break;
+            // normal case
+          } else{
+            $idt = $row["id"] + 1;
+          }
+        }
+        $itt += 1;
+        $temp = $row["id"];
+      }
+    } else{
+      $idt = 0;
+    }
+    return $idt;
   }
 
   public function increaseQtty(){

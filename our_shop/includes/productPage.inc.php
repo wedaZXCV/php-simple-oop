@@ -105,15 +105,6 @@ class ProductPage{
     <form class=\"add-new-product\" action=\"newProduct.php\" method=\"POST\">
       <div class=\"form-rows\">
         <div class=\"labels\">
-          <label for=\"prdid\" id=\"prdid-label\">ID</label>
-        </div>
-        <div class=\"fields\">
-          <input type=\"text\" id=\"prdid\" name=\"id\" class=\"input-fields\" placeholder=\"Enter the id for the product\" required>
-        </div>
-      </div>
-
-      <div class=\"form-rows\">
-        <div class=\"labels\">
           <label for=\"prdname\" id=\"prdname-label\">Name</label>
         </div>
         <div class=\"fields\">

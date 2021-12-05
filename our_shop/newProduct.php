@@ -15,7 +15,8 @@
     
   } else{
     $productIns = new Product($prdPage);
-    $productIns->addNewProduct($_POST["id"], $_POST["name"], $_POST["price"], $_POST["qtt"]);
+    //automatic id is done within addNewProduct method
+    $productIns->addNewProduct($_POST["name"], $_POST["price"], $_POST["qtt"]);
   }
   
 
