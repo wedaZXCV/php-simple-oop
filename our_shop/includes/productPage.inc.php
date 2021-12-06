@@ -36,7 +36,13 @@ class ProductPage{
   private function displayUI($conn, $displaying = 15, $minimalPages = 11){
     // firstly first, do retreive data from SQL server. The data to display by the UI
     if(!isset($_GET["sort"])){
-      [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn);
+      if(!isset($_POST["sort-method"])){
+        //INITIAL
+        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn); 
+      }
+      else{
+        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn, $_POST["sort-method"]); 
+      }
     } else{
       [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn, $_GET["sort"]);
     }
@@ -73,8 +79,13 @@ class ProductPage{
     <form action=\"product.php\" method=\"post\">
       <!-- pagination-clicked to check if it's no need to query anymore,
         the next display will be not initial display anymore-->
-      <input type=\"hidden\" name=\"pagination-clicked\" value=\"True\">
-
+      <input type=\"hidden\" name=\"pagination-clicked\" value=\"True\">";
+    if(isset($_GET["sort"])){
+      echo "
+      <!-- sort method is also passed from page to page -->
+      <input type=\"hidden\" name=\"sort-method\" value=\"".$_GET["sort"]."\">";
+    }
+    echo "
       <!-- data arrays which are the data fetched from SQL, already sorted.
         Is passed to the next page (every page of pagination)-->
       <input type=\"hidden\" name=\"id-array\" value=\"".$idArr."\">

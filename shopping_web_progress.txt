@@ -136,12 +136,16 @@ PROGRESS NOW
 # finish the paginationDisplay
 # re-factor the displayListProduct()
 PROGRESS NOW
-# follow the error  << especially on unserialize error
-check: https://electrictoolbox.com/php-unserialize-e-notice/
+# follow the error  << especially on unserialize error		done!!
+
+pagination success, but id doesn't work with the sorting. The sorting mode is reseted (to name by default) while accessing another pages, resulting incorrect items displaying.
 
 search-bar:
 	search-bar is above pagination, under Clear All, right side of the web page.
 
+
+*notes for improvement:
+1.	learn about session storage. 	<< this is for if  new page is loaded, we don't need to fetch data from database anymore. (correlates with fetchData function).
 
 <<<<<<<<<<<<<<< END OF PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 
