@@ -137,6 +137,7 @@ PROGRESS NOW
 # re-factor the displayListProduct()
 PROGRESS NOW
 # follow the error  << especially on unserialize error
+check: https://electrictoolbox.com/php-unserialize-e-notice/
 
 search-bar:
 	search-bar is above pagination, under Clear All, right side of the web page.

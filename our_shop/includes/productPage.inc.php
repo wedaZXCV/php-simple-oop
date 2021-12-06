@@ -88,7 +88,12 @@ class ProductPage{
         </tr>
     ";
     //HTML codes to call entries from mySQL
-    $this->displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr);
+    if(!isset($_POST["pagination-clicked"])){
+      $this->displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr);
+    } else{
+      $this->displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr, $_POST["page-number"]);
+    }
+    
     
     //HTML codes after list table
     echo "
@@ -219,10 +224,10 @@ class ProductPage{
       }
     }
     //serialize to make compact version, for return value
-    $idArr = htmlentities(serialize($idArr));
-    $nameArr = htmlentities(serialize($nameArr));
-    $priceArr = htmlentities(serialize($priceArr));
-    $qttArr = htmlentities(serialize($qttArr));
+    $idArr = serialize($idArr);
+    $nameArr = serialize($nameArr);
+    $priceArr = serialize($priceArr);
+    $qttArr = serialize($qttArr);
 
     $totalItem = $result->num_rows;
     //returns all of the entry arrays and the $totalItem for pagination
@@ -230,7 +235,7 @@ class ProductPage{
   }
 
   
-  private function displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr){
+  private function displayListProduct($conn, $displaying, $idArr, $nameArr, $priceArr, $qttArr, $pageNumber=1){
     //unserialize first
     //$nameArr = unserialize($_POST['array_data']);  << for example
     $newidArr = unserialize($idArr);
@@ -238,20 +243,18 @@ class ProductPage{
     $newpriceArr = unserialize($priceArr);
     $newqttArr = unserialize($qttArr);
 
-    $pageNumber = $_POST["page-number"];
-
     // define start index location of current page
-    if(!isset($_POST["pagination-clicked"])){
+    if($pageNumber == 1){
       $itemStartIndex = 0;
     } else{
       $itemStartIndex = $pageNumber * $displaying - $displaying;
     }
 
     // later, print only $displaying items
-    $displayID = $this->prepareListEntryDisplay($newidArr, $itemStartIndex);
-    $displayName = $this->prepareListEntryDisplay($newnameArr, $itemStartIndex);
-    $displayPrice = $this->prepareListEntryDisplay($newpriceArr, $itemStartIndex);
-    $displayQtt = $this->prepareListEntryDisplay($newqttArr, $itemStartIndex);
+    $displayID = $this->prepareListEntryDisplay($newidArr, $itemStartIndex, $displaying);
+    $displayName = $this->prepareListEntryDisplay($newnameArr, $itemStartIndex, $displaying);
+    $displayPrice = $this->prepareListEntryDisplay($newpriceArr, $itemStartIndex, $displaying);
+    $displayQtt = $this->prepareListEntryDisplay($newqttArr, $itemStartIndex, $displaying);
     
     foreach($displayID as $key=>$value){
       echo "
@@ -261,7 +264,7 @@ class ProductPage{
         <td>".$displayID[$key]."</td>
         <td>".$displayName[$key]."</td>
 
-        <td><a href=\"functions/modify.php?price=".$displayPrice[$key]."&name=".$displayName[$key]."&qtt=".$row["qtt"]."&id=".$displayID[$key]."\">".$displayPrice[$key]."</a></td>
+        <td><a href=\"functions/modify.php?price=".$displayPrice[$key]."&name=".$displayName[$key]."&qtt=".$displayQtt[$key]."&id=".$displayID[$key]."\">".$displayPrice[$key]."</a></td>
 
         <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$displayQtt[$key]."&name=".$displayName[$key]."&price=".$displayPrice[$key]."&id=".$displayID[$key]."\">".$displayQtt[$key]."</a></td>
 
@@ -275,9 +278,9 @@ class ProductPage{
 
   }
 
-  private function prepareListEntryDisplay($arrayEntry, $itemStartIndex){
+  private function prepareListEntryDisplay($arrayEntry, $itemStartIndex, $displaying){
     $displayArr = array();
-    for($i = $itemStartIndex; $i < ($itemStartIndex+$displaying); $i++){        
+    for($i = $itemStartIndex; $i < ($itemStartIndex + $displaying); $i++){        
       // if the $arrayEntry[$i] is null, so break loop
       if(!isset($arrayEntry[$i])){
         break;
