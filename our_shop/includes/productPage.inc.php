@@ -35,16 +35,11 @@ class ProductPage{
   // the displayUI bellow is for main Product Page
   private function displayUI($conn, $displaying = 15, $minimalPages = 11){
     // firstly first, do retreive data from SQL server. The data to display by the UI
-    if(!isset($_POST["pagination-clicked"])){
-      if(!isset($_GET["sort"])){
-        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn);
-      } else{
-        [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn, $_GET["sort"]);
-      }
+    if(!isset($_GET["sort"])){
+      [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn);
     } else{
-      // do not do the fetch anymore if pagination button was clicked
+      [$idArr, $nameArr, $priceArr, $qttArr, $totalItem] = $this->fetchData($conn, $_GET["sort"]);
     }
-    
     
     //HTML codes before list table
     echo "
@@ -73,7 +68,24 @@ class ProductPage{
     //HTML codes for displaying some functionalities
     $this->clearAllProduct($conn);
     //$this->searchProduct($conn);
-    $this->paginationDisplay($conn, $totalItem, $displaying, $minimalPages, $idArr, $nameArr, $priceArr, $qttArr);
+    // Add hidden form to confirm when any pagination button is clicked
+    echo "
+    <form action=\"product.php\" method=\"post\">
+      <!-- pagination-clicked to check if it's no need to query anymore,
+        the next display will be not initial display anymore-->
+      <input type=\"hidden\" name=\"pagination-clicked\" value=\"True\">
+
+      <!-- data arrays which are the data fetched from SQL, already sorted.
+        Is passed to the next page (every page of pagination)-->
+      <input type=\"hidden\" name=\"id-array\" value=\"".$idArr."\">
+      <input type=\"hidden\" name=\"name-array\" value=\"".$nameArr."\">
+      <input type=\"hidden\" name=\"price-array\" value=\"".$priceArr."\">
+      <input type=\"hidden\" name=\"qtt-array\" value=\"".$qttArr."\">";
+      $this->paginationDisplay($conn, $totalItem, $displaying, $minimalPages, $idArr, $nameArr, $priceArr, $qttArr);
+    echo "
+    </form>
+    ";
+    
 
     echo "<div class=\"item-table-container\">
     <form action=\"functions/delete.php\" method=\"POST\">
@@ -301,22 +313,6 @@ class ProductPage{
   private function paginationDisplay($conn, $totalItem, $displaying, $minimalPages, $idArr, $nameArr, $priceArr, $qttArr){
     // firstly first get the $pages from $totalItem and $displaying
     $pages = ceil($totalItem / $displaying);
-
-    // Add hidden form to confirm when any pagination button is clicked
-    echo "
-    <form action=\"product.php\" method=\"post\">
-      <!-- pagination-clicked to check if it's no need to query anymore,
-        the next display will be not initial display anymore-->
-      <input type=\"hidden\" name=\"pagination-clicked\" value=\"True\">
-
-      <!-- data arrays which are the data fetched from SQL, already sorted.
-        Is passed to the next page (every page of pagination)-->
-      <input type=\"hidden\" name=\"id-array\" value=\"".$idArr."\">
-      <input type=\"hidden\" name=\"name-array\" value=\"".$nameArr."\">
-      <input type=\"hidden\" name=\"price-array\" value=\"".$priceArr."\">
-      <input type=\"hidden\" name=\"qtt-array\" value=\"".$qttArr."\">
-    </form>
-    ";
 
     // $pages reachs minimal amount for displaying in accordion
     // basically, accordion format simplifies the display from being too much
