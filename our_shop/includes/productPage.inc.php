@@ -84,6 +84,10 @@ class ProductPage{
       echo "
       <!-- sort method is also passed from page to page -->
       <input type=\"hidden\" name=\"sort-method\" value=\"".$_GET["sort"]."\">";
+    } else if(isset($_POST["sort-method"])){
+      echo "
+      <!-- sort method is also passed from page to page -->
+      <input type=\"hidden\" name=\"sort-method\" value=\"".$_POST["sort-method"]."\">";
     }
     echo "
       <!-- data arrays which are the data fetched from SQL, already sorted.
