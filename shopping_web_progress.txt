@@ -1,5 +1,12 @@
 hint: find PROGRESS NOW words to get immediately into current progress.
 
+MAIN FEATURE COMPLETE:
+Product page	>> done!!
+
+Main Cart page	>> On progress.
+
+in Cart page	>> pending.
+
 We are going to create shopping web application (simple) based on PHP Object Oriented Programming.
 Object Oriented Programming should not change the index.php
 Everything need to be displayed by the main page (index.php) will be imported from support php file. In order to make up its functionality, This style of programming only change the support file.
@@ -68,6 +75,12 @@ No Cart Exist shown if no Cart object is created before. This display a button t
 
 
 PROGRESS:
+
+
+
+
+
+<<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 creating the product features.
 >>> currently on completing productPage.inc.php
 
@@ -88,7 +101,10 @@ the displayUI comes with add entries which will link the user from product.php t
 product.inc.php add new product to database.	>> add product is done (success adding into database)
 
 fix the product displaying of product list on product.php	>> done!
-<<<<<<<<<<<<<<< ON PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
 remove all product		>> done!
 
 checkbox next to the each product	>> done!
@@ -162,7 +178,7 @@ everything on the each of considered main.php is always only consisting of Objec
 
 
 <<<<<<<<<<<<<<< ON CART MAIN MENU >>>>>>>>>>>>>>>>>>>>>>>
-
+Generate the php file and its class.
 
 
 
