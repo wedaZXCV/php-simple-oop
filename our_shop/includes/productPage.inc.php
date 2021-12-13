@@ -17,7 +17,13 @@ class ProductPage{
     $conn = $this->connectDataBase($withdb = FALSE);
     $this->checkDBandTable($conn);
     
-    $this->displayUI($conn);
+    if(!isset($_POST["search-name"])){
+      $this->displayUI($conn);
+    } else{
+      //do dedicated display for searching mechanism
+      $this->displayUISearch($conn);
+    }
+    
     $this->closeDataBase($conn);
     // if($conn->ping() == TRUE){
       
@@ -73,7 +79,13 @@ class ProductPage{
 
     //HTML codes for displaying some functionalities
     $this->clearAllProduct($conn);
-    //$this->searchProduct($conn);
+    //search button
+    echo"
+    <form action=\"product.php\" method=\"post\">
+      <input type=\"text\" name=\"search-name\" value=\"\" class=\"input-fields-short\" id=\"function-search\" placeholder=\"Find product from the list\" required>
+      <button class=\"button-button\">Find</button>
+    </form>
+    ";
     // Add hidden form to confirm when any pagination button is clicked
     echo "
     <form action=\"product.php\" method=\"post\">
@@ -132,6 +144,77 @@ class ProductPage{
       copyright &copy HinterRollover 2021, allright reserved.
     </div>
     ";
+  }
+
+  private function displayUISearch($conn){
+    if(!isset($_POST['search-name'])){
+      $printOnSearch = "";
+    } else{
+      $printOnSearch = $_POST['search-name'];
+      //retreive data
+      [$idArr, $nameArr, $priceArr, $qttArr] = $this->searchData($conn, $_POST['search-name']);
+    }
+
+    //display UI
+    //HTML codes before list table
+    echo "
+    <div class=\"header\">
+      CHAOS MART
+    </div>
+    <div class=\"title\">
+      <h1>PRODUCT LIST</h1>
+    </div>
+    <div class=\"subtitle\">
+      <h3>Product list consist of various item that are being sold and available for customers.
+        The available quantity and the pricing of each item is well informed through the list.
+        You as the administrator should be able to keep on track with the update of stock condition.
+        You can add new product or remove the existing product on the list.
+        Use the bellow checkbox to choose every item to be cleared, or hover mouse over an item to change its
+        quantity and/or price. Delete individual item one by one is also available.
+      </h3>
+    </div>";
+
+    echo"
+    <form action=\"product.php\" method=\"post\">
+      <input type=\"text\" name=\"search-name\" value=\"".$printOnSearch."\" class=\"input-fields-short\" id=\"product-search\" placeholder=\"Find product from the list\" required>
+      <button class=\"button-button\">Find</button>
+    </form>
+    ";
+
+    echo "<div class=\"item-table-container\">
+    <table class=\"item-table\">
+      <tr>
+        <th class=\"cb-th\"></th>
+        <th><a href=\"product.php?sort=id\">Id</a></th>
+        <th><a href=\"product.php?sort=name\">Name of product</a></th>
+        <th><a href=\"product.php?sort=price\">Price</a></th>
+        <th><a href=\"product.php?sort=qtt\">Quantity in stock</a></th>
+        <th class=\"button-th\"></th>
+      </tr>";
+    //Displaying the search item
+    foreach($idArr as $key=>$value){
+      echo "
+      <tr>
+        <td></td>
+        <td>".$idArr[$key]."</td>
+        <td>".$nameArr[$key]."</td>
+
+        <td><a href=\"functions/modify.php?price=".$priceArr[$key]."&name=".$nameArr[$key]."&qtt=".$qttArr[$key]."&id=".$idArr[$key]."\">".$priceArr[$key]."</a></td>
+
+        <td class=\"quantity-td\"><a href=\"functions/modify.php?qtt=".$qttArr[$key]."&name=".$nameArr[$key]."&price=".$priceArr[$key]."&id=".$idArr[$key]."\">".$qttArr[$key]."</a></td>
+
+        <td class=\"one-delete-td\"></td>
+      </tr>
+    ";
+    }
+    //HTML codes after list table
+      echo"</table>
+    </div>
+    <div class=\"footer\">
+      copyright &copy HinterRollover 2021, allright reserved.
+    </div>
+    ";
+
   }
 
   private function displayAddNewPrd($conn){
@@ -259,6 +342,25 @@ class ProductPage{
     $totalItem = $result->num_rows;
     //returns all of the entry arrays and the $totalItem for pagination
     return [$idArr, $nameArr, $priceArr, $qttArr, $totalItem];
+  }
+
+  private function searchData($conn, $name){
+    $result = $conn->query("SELECT * FROM products WHERE name LIKE \"%".$name."%\";");
+    //assign every data into new array
+    if($result->num_rows > 0){
+      $idArr = array();
+      $nameArr = array();
+      $priceArr = array();
+      $qttArr = array();
+      while($row = $result->fetch_assoc()){
+        array_push($idArr, $row["id"]);
+        array_push($nameArr, $row["name"]);
+        array_push($priceArr, $row["price"]);
+        array_push($qttArr, $row["qtt"]);
+      }
+    }
+    //returns all of the entry arrays
+    return [$idArr, $nameArr, $priceArr, $qttArr];
   }
 
   

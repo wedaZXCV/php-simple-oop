@@ -142,9 +142,12 @@ pagination success, but id doesn't work with the sorting. The sorting mode is re
 
 Pagination is now all success and reliable to use.
 
-PROGRESS NOW
 search-bar:
-	search-bar is above pagination, under Clear All, right side of the web page.
+	search-bar is above pagination, under Clear All, right side of the web page.   << done!!
+
+PROGRESS NOW
+	apply some CSS formatting
+
 
 
 *notes for improvement:
