@@ -67,15 +67,14 @@ class MainCartPage{
       </h3>
     </div>";
     //Creating new cart functionality
-    echo "
-    <form action=\"newCart.php\" method=\"POST\">
+    echo "<button onclick=\"newCart()\">Create new cart</button>";
 
-
-    </form>
-    ";
 
     //HTML codes after cart grid
     echo "
+    <br>
+    <br>
+    <br>
     <div class=\"footer\">
       copyright &copy HinterRollover 2021, allright reserved.
     </div>

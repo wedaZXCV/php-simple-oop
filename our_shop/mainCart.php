@@ -33,10 +33,20 @@
   $prdPage->initialLoad();
 
   // all of the main features is within the initialLoad function
-
-
-
-
-
+  // except the front-end actions. It's on script bellow:
 ?>
 </body>
+<script>
+  function newCart(){
+    let person = prompt("Please enter the new cart name, (please camel case):");
+    if(person == ""){
+      alert("Just fill it, or cancel!");
+    } else if(!person == ""){
+      alert("Cart is named as " + person);
+    }
+
+  }
+
+
+
+</script>
