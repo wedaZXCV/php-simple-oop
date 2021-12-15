@@ -161,14 +161,15 @@ Pagination is now all success and reliable to use.
 search-bar:
 	search-bar is above pagination, under Clear All, right side of the web page.   << done!!
 
-PROGRESS NOW
-	apply some CSS formatting
+
+	
 
 
 
 *notes for improvement:
 1.	learn about session storage. 	<< this is for if  new page is loaded, we don't need to fetch data from database anymore. (correlates with fetchData function).
 2.	we can add (based on sort mode) hint characther to each pagination. For example, if item with initial letter R can be found in page 12, so we add.... maybe this will just create a dedicated draw display to do so (to find beginning letter, like dictionary)
+3. apply some CSS formatting
 
 <<<<<<<<<<<<<<< END OF PRODUCT PAGE >>>>>>>>>>>>>>>>>>>>>>>
 
@@ -179,11 +180,20 @@ everything on the each of considered main.php is always only consisting of Objec
 
 <<<<<<<<<<<<<<< ON CART MAIN MENU >>>>>>>>>>>>>>>>>>>>>>>
 Generate the php file and its class.
+displaying chart will use list items
+Cart will be listed on "cartlist" table. It has 3 entries, which is id, name, and note.   << done!!
+
+PROGRESS NOW
+add creating new cart functionality
 
 
+add removing existing cart functionality
 
 
+when there is no cart left, display "currently no cart" on page.
 
+
+display the fetched data as button grid of cart to be clicked.
 
 
 

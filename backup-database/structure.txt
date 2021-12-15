@@ -1,0 +1,4 @@
+CREATE TABLE functi (id INT(255) UNSIGNED,
+name VARCHAR(50),
+price DECIMAL(10,2),
+qtt INT(255));

@@ -152,7 +152,7 @@ class ProductPage{
     } else{
       $printOnSearch = $_POST['search-name'];
       //retreive data
-      [$idArr, $nameArr, $priceArr, $qttArr] = $this->searchData($conn, $_POST['search-name']);
+      [$idArr, $nameArr, $priceArr, $qttArr] = $this->searchData($conn, $_POST["search-name"]);
     }
 
     //display UI
