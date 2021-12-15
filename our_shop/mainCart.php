@@ -43,6 +43,7 @@
       alert("Just fill it, or cancel!");
     } else if(!person == ""){
       alert("Cart is named as " + person);
+      //run JS function to XMLHttpRequest() here.
     }
 
   }

@@ -185,6 +185,14 @@ Cart will be listed on "cartlist" table. It has 3 entries, which is id, name, an
 
 PROGRESS NOW
 add creating new cart functionality
+progress:
+	via javascript prompt		<< done!!
+	How to from javascript prompt button to sql query?
+
+	using AJAX to retrieve data from database:
+	https://www.w3schools.com/js/js_ajax_database.asp	<< already sufficient tutorial.
+
+	So, after click yes on prompt, just add new cart name on cartlist table and then re-load again to mainCart.php file.
 
 
 add removing existing cart functionality
