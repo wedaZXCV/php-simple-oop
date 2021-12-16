@@ -6,6 +6,7 @@
   <title>Main cart</title>
 </head>
 <body>
+  <p id="mey"></p>
 <?php 
   /* mainCart.php
 
@@ -38,12 +39,19 @@
 </body>
 <script>
   function newCart(){
-    let person = prompt("Please enter the new cart name, (please camel case):");
-    if(person == ""){
+    let cartname = prompt("Please enter the new cart name, (please camel case):");
+    if(cartname == ""){
       alert("Just fill it, or cancel!");
-    } else if(!person == ""){
-      alert("Cart is named as " + person);
+    } else if(!cartname == ""){
+      alert("Cart is named as " + cartname);
       //run JS function to XMLHttpRequest() here.
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+        //Function(s) to be executed when XMLHttp connection is ready
+        document.getElementById("mey").innerHTML = "connection is good";
+      }
+      xhttp.open("GET", "functions/addCart.php?name="+cartname);
+      xhttp.send();
     }
 
   }
