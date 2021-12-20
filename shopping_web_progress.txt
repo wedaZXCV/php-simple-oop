@@ -191,6 +191,18 @@ progress:
 
 	using AJAX to retrieve data from database:
 	https://www.w3schools.com/js/js_ajax_database.asp	<< already sufficient tutorial.
+	https://www.youtube.com/watch?v=tbK1MrquAfA	<< tutorial now
+	https://stackoverflow.com/questions/50152966/post-method-to-send-form-data-with-ajax-without-jquery		<< apparently will solve the problem.
+	https://javascript.info/xmlhttprequest		<< tutorial now
+	https://stackoverflow.com/questions/9713058/send-post-data-using-xmlhttprequest		<< tutorial now
+
+PROGRESS NOW
+apparently on createCart.php nearby mainCart.php......
+let's use dirrect calling without include class
+
+
+
+
 
 	So, after click yes on prompt, just add new cart name on cartlist table and then re-load again to mainCart.php file.
 

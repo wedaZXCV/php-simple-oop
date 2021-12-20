@@ -67,7 +67,9 @@ class MainCartPage{
       </h3>
     </div>";
     //Creating new cart functionality
-    echo "<button onclick=\"newCart()\">Create new cart</button>";
+    echo "
+    <button onclick=\"newCart()\">Create new cart</button>
+    ";
 
 
     //HTML codes after cart grid

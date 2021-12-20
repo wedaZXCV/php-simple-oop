@@ -37,25 +37,4 @@
   // except the front-end actions. It's on script bellow:
 ?>
 </body>
-<script>
-  function newCart(){
-    let cartname = prompt("Please enter the new cart name, (please camel case):");
-    if(cartname == ""){
-      alert("Just fill it, or cancel!");
-    } else if(!cartname == ""){
-      alert("Cart is named as " + cartname);
-      //run JS function to XMLHttpRequest() here.
-      const xhttp = new XMLHttpRequest();
-      xhttp.onload = function(){
-        //Function(s) to be executed when XMLHttp connection is ready
-        document.getElementById("mey").innerHTML = "connection is good";
-      }
-      xhttp.open("GET", "functions/addCart.php?name="+cartname);
-      xhttp.send();
-    }
-
-  }
-
-
-
-</script>
+<script src="mainCart.js"></script>
