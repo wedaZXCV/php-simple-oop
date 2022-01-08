@@ -16,7 +16,8 @@ class MainCartPage{
   public function initialLoad(){
   $conn = $this->connectDataBase($withdb = FALSE);
   $this->checkDBandTable($conn);
-  $this->displayUI($conn);
+  //$this->displayUI($conn);
+  $this->testDisplayUI($conn);
   $this->closeDataBase($conn);
   }
 
@@ -71,6 +72,42 @@ class MainCartPage{
     <button onclick=\"newCart()\">Create new cart</button>
     ";
 
+
+    //HTML codes after cart grid
+    echo "
+    <br>
+    <br>
+    <br>
+    <div class=\"footer\">
+      copyright &copy HinterRollover 2021, allright reserved.
+    </div>
+    ";
+  }
+
+  private function testDisplayUI($conn){
+    //HTML codes before cart grid
+    echo "
+    <div class=\"header\">
+      CHAOS MART
+    </div>
+    <div class=\"title\">
+      <h1>MAIN CART PAGE</h1>
+    </div>
+    <div class=\"subtitle\">
+      <h3>Check cart to start shopping. If there is none, you can create one or
+      multiple new carts. You can add multiple cart for various kind of purposes.
+      Remove cart(s) using delete menu from \"Remove existing cart\" button.
+      </h3>
+    </div>";
+    //Creating new cart functionality
+    echo "
+      <label for=\"cart-name-input\">
+      <input id=\"cart-name-input\" type=\"text\">
+      <input id=\"cart-name-button\" type=\"button\" value=\"create cart\">
+    ";
+    echo "
+      <div id=\"txtHint\"></div>
+    ";
 
     //HTML codes after cart grid
     echo "

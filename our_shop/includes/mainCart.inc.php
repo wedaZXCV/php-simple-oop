@@ -9,13 +9,12 @@ class MainCart extends MainCartPage{
 
   public function addNewCart($cartname){
     $conn = $this->mainCart->connectDataBase();
-    $id = $this->autoGenerateID($conn);
+    $id = 3;
     $note = "initial note for first test";
 
     $conn->query("INSERT INTO cartlist VALUES($id, $cartname, $note);");
     
     $this->mainCart->closeDataBase($conn);
-    //header("Location: ../mainCart.php", TRUE, 301);
   }
 
   private function autoGenerateID($conn){

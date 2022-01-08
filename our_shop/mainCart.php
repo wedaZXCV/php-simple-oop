@@ -37,4 +37,4 @@
   // except the front-end actions. It's on script bellow:
 ?>
 </body>
-<script src="mainCart.js"></script>
+<script src="main-cart.js"></script>

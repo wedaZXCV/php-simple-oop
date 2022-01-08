@@ -1,4 +1,5 @@
-hint: find PROGRESS NOW words to get immediately into current progress.
+hint: 	find PROGRESS NOW words to get immediately into current progress.
+	find SUGGESTION words to get immediately into learning material suggestion.
 
 MAIN FEATURE COMPLETE:
 Product page	>> done!!
@@ -201,7 +202,28 @@ apparently on createCart.php nearby mainCart.php......
 let's use dirrect calling without include class
 
 
+PROGRESS NOW
+All of the above effort seems not working. A lot of wasting time. If we about to learn AJAX, what about pick simple tutorial just to submit from regular form.
+See:
+https://stackoverflow.com/questions/49127647/insert-into-database-using-xmlhttprequest
+		<< for using XMLHttpRequest no Jquery, send multiple data
 
+doing callback function:
+https://ultimatecourses.com/blog/avoiding-anonymous-javascript-functions
+
+proven SOLUTION:
+	it was because of the header request.
+	Now we get the correct header request.
+==========================
+SUGGESTION:
+	re-learn about setRequestHeader for, as example here is XMLHTTPRequest module.
+==========================
+PROGRESS NOW
+getting input and send request:
+https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaScript
+
+the problem is sometimes the js file doesn't get updated on browser even you have change the code multiple of time. See the explaination:
+https://stackoverflow.com/questions/3951187/javascript-file-not-updating-no-matter-what-i-do
 
 
 	So, after click yes on prompt, just add new cart name on cartlist table and then re-load again to mainCart.php file.
