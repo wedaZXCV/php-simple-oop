@@ -106,7 +106,7 @@ class MainCartPage{
         <div class=\"label-input\">
           <label for=\"cart-name-input\">Cart Name: </label>
         </div>
-        <input id=\"cart-name-input\" type=\"text\" class=\"inputs\">
+        <input id=\"cart-name-input\" type=\"text\" class=\"inputs\" placeholder=\"Add the cart name...\">
       </p>
       <p class=\"form-rows\">
         <div class=\"label-input\">
@@ -114,10 +114,8 @@ class MainCartPage{
         </div>
         <textarea id=\"cart-note-input\" placeholder=\"Add some note...\" rows=\"4\" cols=\"50\" class=\"inputs\"></textarea>
       </p>
-      <p class=\"form-rows\">
-        <input id=\"cart-name-button\" type=\"button\" value=\"create cart\" class=\"inputs\"><br>
-      </p>
     </div>
+    <input id=\"cart-name-button\" type=\"button\" value=\"create cart\" class=\"inputs\">
     ";
     echo "
       <div id=\"txtHint\"></div>

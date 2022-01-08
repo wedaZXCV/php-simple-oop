@@ -16,7 +16,12 @@
     ";
     $mainPage = new MainCartPage($dbhost, $dbuser, $dbpass, $db);
     $cartIns = new MainCart($mainPage);
-    $cartIns->addNewCart($_POST["cartname"]);
+    if(isset($_POST["cartnote"])){
+      $cartIns->addNewCart($_POST["cartname"], $_POST["cartnote"]);
+    }else {
+      $cartIns->addNewCart($_POST["cartname"]);
+    }
+    
   }else{
     echo "
     <p>

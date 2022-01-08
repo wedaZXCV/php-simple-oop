@@ -7,6 +7,7 @@ let button = document.getElementById("cart-name-button");
 
 function createNewCart(){
   let cartname = document.getElementById("cart-name-input").value;
+  let cartnote = document.getElementById("cart-note-input").value;
   if(cartname != ""){
     console.log("Your cartname is now named as "+cartname);
     let xhttp = new XMLHttpRequest();
@@ -20,7 +21,7 @@ function createNewCart(){
     }
     xhttp.open('POST',"functions/createCart.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("cartname="+cartname);
+    xhttp.send("cartname="+cartname+"&cartnote="+cartnote);
   } else{
     console.log("You need to add a name or something.");
   }

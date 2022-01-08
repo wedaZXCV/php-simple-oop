@@ -18,13 +18,13 @@
 }
 
 #cart-name-button{
-  vertical-align: middle;
+  margin-top: 25px;
 }
 
 .label-input{
   display: table-cell;
   width: 75px;
-  padding-right: 200px;
+  padding-right: 15px;
   height: 35px;
 }
 
