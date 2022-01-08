@@ -8,11 +8,13 @@ class MainCart extends MainCartPage{
   }
 
   public function addNewCart($cartname){
+    echo "You've reached addNewCart on Cart Instance. Cartname type: ";
+    echo(gettype($cartname));
     $conn = $this->mainCart->connectDataBase();
-    $id = 3;
+    $id = $this->autoGenerateID($conn);
     $note = "initial note for first test";
 
-    $conn->query("INSERT INTO cartlist VALUES($id, $cartname, $note);");
+    $conn->query("INSERT INTO cartlist VALUES($id, '$cartname', '$note');");
     
     $this->mainCart->closeDataBase($conn);
   }

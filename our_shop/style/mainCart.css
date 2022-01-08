@@ -1,0 +1,34 @@
+.form{
+  display: table;
+}
+
+.form-rows{
+  display: table-row;
+  height: 20px;
+}
+
+#cart-note-input{
+  vertical-align: text-top;
+}
+
+#cart-name-input{
+  vertical-align: text-top;
+  width: 150px;
+  height: 35px;
+}
+
+#cart-name-button{
+  vertical-align: middle;
+}
+
+.label-input{
+  display: table-cell;
+  width: 75px;
+  padding-right: 200px;
+  height: 35px;
+}
+
+.inputs{
+  display: table-cell;
+}
+

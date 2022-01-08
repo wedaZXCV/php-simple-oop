@@ -222,6 +222,17 @@ PROGRESS NOW
 getting input and send request:
 https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaScript
 
+the getting input and POST request until saved on mysql is just already succcessful.
+===
+PROGRESS NOW
+* let the user adding note for help about their cart.
+* let's Try implementing the same functionality on main-cart-V2.js, which is now we doing it by prompt, which is cooler I think, but you cannot adding note there. The substitution for note is,,, Ask the user:
+
+	INPUT: What will this cart for? You might want adding some note.
+		<textarea>
+
+
+
 the problem is sometimes the js file doesn't get updated on browser even you have change the code multiple of time. See the explaination:
 https://stackoverflow.com/questions/3951187/javascript-file-not-updating-no-matter-what-i-do
 

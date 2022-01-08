@@ -14,9 +14,9 @@
       successfully got POST cartname! The cart name is ".$_POST["cartname"]."
     </p>
     ";
-    // $mainPage = new MainCartPage($dbhost, $dbuser, $dbpass, $db);
-    // $cartIns = new MainCart($mainPage);
-    // $cartIns->addNewCart($_POST["cartname"]);
+    $mainPage = new MainCartPage($dbhost, $dbuser, $dbpass, $db);
+    $cartIns = new MainCart($mainPage);
+    $cartIns->addNewCart($_POST["cartname"]);
   }else{
     echo "
     <p>
