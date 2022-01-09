@@ -224,12 +224,14 @@ https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaS
 
 the getting input and POST request until saved on mysql is just already succcessful.
 ===
-PROGRESS NOW
-* let the user adding note for help about their cart.
+
+* let the user adding note for help about their cart.	<< done!!
 * let's Try implementing the same functionality on main-cart-V2.js, which is now we doing it by prompt, which is cooler I think, but you cannot adding note there. The substitution for note is,,, Ask the user:
 
 	INPUT: What will this cart for? You might want adding some note.
-		<textarea>
+		<textarea>		<<<	done!!
+==================== PROBLEM SOLVED, AS ABOVE^^^
+
 
 
 
@@ -238,7 +240,9 @@ https://stackoverflow.com/questions/3951187/javascript-file-not-updating-no-matt
 
 
 	So, after click yes on prompt, just add new cart name on cartlist table and then re-load again to mainCart.php file.
-
+====================
+PROGRESS NOW
+display the fetched data as button grid of cart to be clicked.
 
 add removing existing cart functionality
 
@@ -246,7 +250,7 @@ add removing existing cart functionality
 when there is no cart left, display "currently no cart" on page.
 
 
-display the fetched data as button grid of cart to be clicked.
+
 
 
 

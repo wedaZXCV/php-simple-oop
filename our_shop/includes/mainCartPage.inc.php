@@ -16,8 +16,8 @@ class MainCartPage{
   public function initialLoad(){
   $conn = $this->connectDataBase($withdb = FALSE);
   $this->checkDBandTable($conn);
-  //$this->displayUI($conn);
-  $this->testDisplayUI($conn);
+  //$this->displayUIV2($conn);
+  $this->displayUI($conn);
   $this->closeDataBase($conn);
   }
 
@@ -51,7 +51,7 @@ class MainCartPage{
     $conn -> close();
   }
 
-  private function displayUI($conn){
+  private function displayUIV2($conn){
     [$idArr, $nameArr, $noteArr] = $this->fetchData($conn);
     //HTML codes before cart grid
     echo "
@@ -69,9 +69,18 @@ class MainCartPage{
     </div>";
     //Creating new cart functionality
     echo "
-    <button onclick=\"newCart()\">Create new cart</button>
+    <div class=\"form-rows\">
+      <p>What is your need? What will be this cart used for?
+      </p>
+    </div>
+    <div class=\"form-rows\">
+      <textarea id=\"cart-note-input\" rows=\"5\" cols=\"75\" placeholder=\"Add some note...\"></textarea>
+    </div>
+    <input id=\"cart-name-button\" type=\"button\" value=\"create cart\">
     ";
-
+    echo "
+      <div id=\"txtHint\"></div>
+    ";
 
     //HTML codes after cart grid
     echo "
@@ -84,7 +93,7 @@ class MainCartPage{
     ";
   }
 
-  private function testDisplayUI($conn){
+  private function displayUI($conn){
     //HTML codes before cart grid
     echo "
     <div class=\"header\">
