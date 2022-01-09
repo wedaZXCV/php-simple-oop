@@ -52,6 +52,8 @@ class MainCartPage{
   }
 
   private function displayUIV2($conn){
+    // firstly first, do retreive data from SQL server. The data to display by the UI
+    //INITIAL
     [$idArr, $nameArr, $noteArr] = $this->fetchData($conn);
     //HTML codes before cart grid
     echo "
@@ -94,6 +96,10 @@ class MainCartPage{
   }
 
   private function displayUI($conn){
+    // firstly first, do retreive data from SQL server. The data to display by the UI
+    //INITIAL
+    [$idArr, $nameArr, $noteArr] = $this->fetchData($conn);
+
     //HTML codes before cart grid
     echo "
     <div class=\"header\">
@@ -129,6 +135,8 @@ class MainCartPage{
     echo "
       <div id=\"txtHint\"></div>
     ";
+    //HTML codes for displaying cart grid
+    $this->displayCarts($idArr, $nameArr, $noteArr);
 
     //HTML codes after cart grid
     echo "
@@ -159,11 +167,39 @@ class MainCartPage{
       $noteArr = serialize($noteArr);
       return [$idArr, $nameArr, $noteArr];
     } else{
-      
+      echo "actually we get an empty set. Sorry...";
     }
   }
 
-  
+  private function displayCarts($idArr, $nameArr, $noteArr){
+    $newidArr = unserialize($idArr);
+    $newnameArr = unserialize($nameArr);
+    $newnoteArr = unserialize($noteArr);
+
+    //The grid should be having 6 items per row.
+    // so we need to calculate how many rows initially.
+    $gridRows = ceil(count($newidArr) / 6);
+    $counter = 0;
+
+    echo"<div id=\"grids\">";
+    for($itt=0; $itt<$gridRows; $itt++){
+      echo"<div class=\"grid-row\">";
+      for($j=0; $j<6; $j++){
+        echo"
+          <div class=\"grid-col\" id=\"id-".$newidArr[$counter]."\">
+            <p class=\"grid-text\">
+              ".$newnameArr[$counter]."
+            </p>
+          </div>
+        ";
+        $counter += 1;
+      }
+      echo"</div>";
+    }
+    echo"</div>";
+
+
+  }
 
 
 }
