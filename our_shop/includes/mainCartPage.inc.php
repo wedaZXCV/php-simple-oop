@@ -99,7 +99,7 @@ class MainCartPage{
     // firstly first, do retreive data from SQL server. The data to display by the UI
     //INITIAL
     [$idArr, $nameArr, $noteArr] = $this->fetchData($conn);
-
+    
     //HTML codes before cart grid
     echo "
     <div class=\"header\">
@@ -135,8 +135,14 @@ class MainCartPage{
     echo "
       <div id=\"txtHint\"></div>
     ";
-    //HTML codes for displaying cart grid
+    //HTML codes as an output for cart grid display
+    echo "
+      <div id=\"grids\">
+    ";
     $this->displayCarts($idArr, $nameArr, $noteArr);
+    echo "
+      </div>
+    ";
 
     //HTML codes after cart grid
     echo "
@@ -149,7 +155,7 @@ class MainCartPage{
     ";
   }
 
-  private function fetchData($conn){
+  protected function fetchData($conn){
     $result = $conn->query("SELECT * FROM cartlist ORDER BY id");
     //assign every data into new array
     if($result->num_rows > 0){
@@ -171,7 +177,7 @@ class MainCartPage{
     }
   }
 
-  private function displayCarts($idArr, $nameArr, $noteArr){
+  protected function displayCarts($idArr, $nameArr, $noteArr){
     $newidArr = unserialize($idArr);
     $newnameArr = unserialize($nameArr);
     $newnoteArr = unserialize($noteArr);
@@ -185,14 +191,20 @@ class MainCartPage{
     for($itt=0; $itt<$gridRows; $itt++){
       echo"<div class=\"grid-row\">";
       for($j=0; $j<6; $j++){
-        echo"
+        if(isset($newidArr[$counter])){
+          echo"
           <div class=\"grid-col\" id=\"id-".$newidArr[$counter]."\">
-            <p class=\"grid-text\">
-              ".$newnameArr[$counter]."
-            </p>
+            <div class=\"grid-text-container\">
+              <p class=\"grid-text\">
+                ".$newnameArr[$counter]."
+              </p>
+            </div>
           </div>
-        ";
-        $counter += 1;
+          ";
+          $counter += 1;
+        } else{
+          break;
+        }
       }
       echo"</div>";
     }

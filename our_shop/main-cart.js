@@ -14,7 +14,7 @@ function createNewCart(){
     xhttp.onload = function() {
       if (xhttp.readyState === 4 && xhttp.status === 200) {
         console.log("success");
-        document.getElementById("txtHint").innerHTML = xhttp.responseText;
+        document.getElementById("grids").innerHTML = xhttp.responseText;
       } else{
         console.log(xhttp.status);
       }

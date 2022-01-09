@@ -9,19 +9,19 @@
   $db = "shopping";
 
   if(isset($_POST["cartname"])){
-    echo "
-    <p>
-      successfully got POST cartname! The cart name is ".$_POST["cartname"]."
-    </p>
-    ";
     $mainPage = new MainCartPage($dbhost, $dbuser, $dbpass, $db);
     $cartIns = new MainCart($mainPage);
+    $conn = $cartIns->connectdb();
     if(isset($_POST["cartnote"])){
-      $cartIns->addNewCart($_POST["cartname"], $_POST["cartnote"]);
+      $cartIns->addNewCart($conn, $_POST["cartname"], $_POST["cartnote"]);
     }else {
-      $cartIns->addNewCart($_POST["cartname"]);
+      $cartIns->addNewCart($conn, $_POST["cartname"]);
     }
-    
+    // THIS IS THE ONLY RESPONSE
+    // retrieve all cart and display immediately
+    $cartIns->showCarts($conn);
+    $cartIns->closedb($conn);
+
   }else{
     echo "
     <p>

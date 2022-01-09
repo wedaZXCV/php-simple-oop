@@ -243,6 +243,8 @@ https://stackoverflow.com/questions/3951187/javascript-file-not-updating-no-matt
 ====================
 PROGRESS NOW
 display the fetched data as button grid of cart to be clicked.
+	now is setting in order to make the new addly cart is instantly added without reloading.	<< done!!
+	then setting click apparatus to open the cart page.
 
 add removing existing cart functionality
 

@@ -7,15 +7,23 @@ class MainCart extends MainCartPage{
     $this->mainCart = $mainCart;
   }
 
-  public function addNewCart($cartname, $cartnote=""){
-    echo "You've reached addNewCart on Cart Instance. Cartname type: ";
-    echo(gettype($cartname));
+  public function connectdb(){
     $conn = $this->mainCart->connectDataBase();
-    $id = $this->autoGenerateID($conn);
+    return $conn;
+  }
 
-    $conn->query("INSERT INTO cartlist VALUES($id, '$cartname', '$cartnote');");
-    
+  public function closedb($conn){
     $this->mainCart->closeDataBase($conn);
+  }
+
+  public function addNewCart($conn, $cartname, $cartnote=""){
+    $id = $this->autoGenerateID($conn);
+    $conn->query("INSERT INTO cartlist VALUES($id, '$cartname', '$cartnote');");
+  }
+
+  public function showCarts($conn){
+    [$idArr, $nameArr, $noteArr] = $this->mainCart->fetchData($conn);
+    $this->mainCart->displayCarts($idArr, $nameArr, $noteArr);
   }
 
   private function autoGenerateID($conn){
