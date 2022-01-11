@@ -131,6 +131,7 @@ class MainCartPage{
       </p>
     </div>
     <input id=\"cart-name-button\" type=\"button\" value=\"create cart\" class=\"inputs\">
+    <input id=\"delete-all-cart-button\" type=\"button\" value=\"delete all cart\" class=\"inputs\">
     ";
     echo "
       <div id=\"txtHint\"></div>
@@ -139,7 +140,12 @@ class MainCartPage{
     echo "
       <div id=\"grids\">
     ";
-    $this->displayCarts($idArr, $nameArr, $noteArr);
+    if(isset($idArr)){
+      $this->displayCarts($idArr, $nameArr, $noteArr);
+    }else{
+      echo "There is no currently cart available.";
+    }
+    
     echo "
       </div>
     ";
@@ -187,7 +193,7 @@ class MainCartPage{
     $gridRows = ceil(count($newidArr) / 6);
     $counter = 0;
 
-    echo"<div id=\"grids\">";
+    echo"<div id=\"grids-content\">";
     for($itt=0; $itt<$gridRows; $itt++){
       echo"<div class=\"grid-row\">";
       for($j=0; $j<6; $j++){
@@ -211,9 +217,8 @@ class MainCartPage{
       echo"</div>";
     }
     echo"</div>";
-
-
   }
+    
 
 
 }
