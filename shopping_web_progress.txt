@@ -241,18 +241,25 @@ https://stackoverflow.com/questions/3951187/javascript-file-not-updating-no-matt
 
 	So, after click yes on prompt, just add new cart name on cartlist table and then re-load again to mainCart.php file.
 ====================
-PROGRESS NOW
-display the fetched data as button grid of cart to be clicked.
-	now is setting in order to make the new addly cart is instantly added without reloading.	<< done!!
-	then setting click apparatus to open the cart page.
 
-add removing existing cart functionality
+display the fetched data as button grid of cart to be clicked.		<< done!!
+	now is setting in order to make the new addly cart is instantly added without reloading.	<< done!!
+	then setting click apparatus to open the cart page.		<< done!!
+
+PROGRESS NOW
+add removing existing cart functionality:
+	* remove all by button as usual
+	* option for remove operation, display by drawer:
+		* remove one by one >> prompt to confirm delete
+		* remove by checked box >> prompt to confirm delete on multiple items.
 
 
 when there is no cart left, display "currently no cart" on page.
 
 
+when new cart is created, this will create new table named that particular cart.
 
+display note after cursor hovering the cart for certain momment.
 
 
 
@@ -261,6 +268,25 @@ when there is no cart left, display "currently no cart" on page.
 <<<<<<<<<<<<<<< END OF CART MAIN MENU >>>>>>>>>>>>>>>>>>>>>>>
 
 
+
+<<<<<<<<<<<<<<< ON CART MENU >>>>>>>>>>>>>>>>>>>>>>>
+CART MENU is a page that comes after user clicking a particular cart at CART MAIN MENU.
+So it displays specific information about what items the cart is currently containing.
+So this must be a list that resemble the Product page. So, there are some of features to be accomplished:
+
+1. Show items on the cart
+
+2. Total item contained
+
+3. Total sum of products
+
+4. Add item to chart (on newCartItem.php):
+	* Show the Product page like which is now the user cannot modify the list. 
+	* They can select it individually or use checkbox to add multiple items.
+	* If they select individually, there is drawer pane appear that can be pulled to show selected item. The drawer must be at top of page and following the user's mouse scrolling.
+
+
+<<<<<<<<<<<<<<< END OF CART MENU >>>>>>>>>>>>>>>>>>>>>>>
 
 
 
