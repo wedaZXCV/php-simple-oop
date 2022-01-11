@@ -195,6 +195,7 @@ class MainCartPage{
           echo"
           <div class=\"grid-col\" id=\"id-".$newidArr[$counter]."\">
             <div class=\"grid-text-container\">
+              <img src=\"images/cart-complete.png\" class=\"grid-image\" width=\"120\" height=\"120\">
               <p class=\"grid-text\">
                 ".$newnameArr[$counter]."
               </p>
